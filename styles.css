@@ -617,7 +617,7 @@ a:hover {
 
 /* Scrollable news box */
 .news-box {
-    max-height: 245px;          /* height of the box */
+    max-height: 300px;          /* height of the box */
     overflow-y: auto;           /* scroll if content exceeds */
     border-top: 1px solid;
     border-radius: 5px;
@@ -637,12 +637,16 @@ a:hover {
 .news-list li {
     display: grid;
     grid-template-columns: 150px 1fr; /* left fixed width, right flexible */
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem; 
     align-items: start;
 }
 
 /* Month column */
 .news-date {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    padding-left: 15px;
     font-weight: bold;
     color: var(--color-link);
 }
@@ -651,6 +655,35 @@ a:hover {
     .news-list li {
         grid-template-columns: 125px 1fr; /* left fixed width, right flexible */
     }
+}
+
+.pinned-date {
+    position: relative;
+    display: inline-block;
+    
+}
+
+.pin-ribbon {
+    position: absolute;
+
+    top: -3px;
+    left: -20px;     
+
+    transform: rotate(-45deg);
+
+    background: #e63946;
+    color: white;
+
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    padding: 1px 5px;
+    border-radius: 3px;
+
+    white-space: nowrap;
+    z-index: 10;
 }
 /* ========================================================================
                             EXPERIENCE & PROJECTS
@@ -722,7 +755,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
 
     margin-bottom: 0.5rem;
