@@ -11,7 +11,7 @@ The website is currently built using vanilla HTML, CSS, and JavaScript with a li
 - [x] ~~Add a Recent News section~~
 - [x] ~~Add a Resources section~~
 - [x] ~~Migrate old articles from Notion to Markdown~~
-- [ ] Add project logo  
+- [x] Add project logo  
 - [x] ~~Remove tags from article tiles and replace them with topic tags (non-clickable). Improve the ui~~
 - [x] ~~Add project tags by topics~~
 - [ ] Add article/projects search feature
@@ -22,4 +22,4 @@ The website is currently built using vanilla HTML, CSS, and JavaScript with a li
 - [x] [Blogs] Math Equation rendering
 - [x] [Blogs] Blockquote
 - [x] [Blogs] Code Blocks header and color
-- [ ] [Blogs] Paragraph spacing and height
+- [x] [Blogs] Paragraph spacing and height
