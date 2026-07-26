@@ -4,6 +4,7 @@
   --bg-soft: #f6f6f7;
   --text: #1c1c1e;
   --text-soft: #5b5b60;
+  --text-quote: #78350f;
   --border: #e6e6e8;
   --link: #1a95e0;
   --accent: #F97316;
@@ -22,6 +23,7 @@
   --bg-soft: #1a1a1c;
   --text: #e8e8ea;
   --text-soft: #9a9aa0;
+  --text-quote: #fcd9a8;
   --border: #2a2a2d;
   --link: #1a95e0;
   --accent: #F97316;
@@ -234,7 +236,7 @@ a:hover { color: var(--accent); text-decoration: underline; }
   background: rgba(245, 158, 11, 0.14); /* Amber */
   border-left: 4px solid #f59e0b;
   border-radius: 6px;
-  color: var(--text-soft);
+  color: var(--text-quote);
   font-size: .95em;
 }
 .markdown-body blockquote::before {
@@ -265,7 +267,6 @@ a:hover { color: var(--accent); text-decoration: underline; }
   padding: .15em .45em;
   border-radius: 5px;
 }
-
 
 /* Code block wrapper */
 .code-block {
@@ -485,3 +486,51 @@ a:hover { color: var(--accent); text-decoration: underline; }
   .copy-btn { font-size: .67rem; padding: .15rem .4rem; }
   /* .layout { padding: 0 1.1rem 3rem; gap: 1.5rem; } */
 }
+
+
+
+/* Mermaid Digram */
+
+.markdown-body .mermaid {
+  margin: 1.8rem 0;
+  text-align: center;
+  background: #fffdf7;
+  border: 0.1px solid #1c1c1e;
+  border-radius: 10px;
+  padding: 1.6rem;
+}
+
+/* Force light paper background even when site is in dark mode */
+[data-theme="dark"] .markdown-body .mermaid {
+  background: #fffdf7;
+  border-color: #1c1c1e;
+}
+
+/* Cycle bold, flat Excalidraw-ish colors — same in light & dark */
+.mermaid .node:nth-of-type(6n+1) path,
+.mermaid .node:nth-of-type(6n+1) rect { fill: #ffd43b !important; stroke: #1c1c1e !important; }
+.mermaid .node:nth-of-type(6n+2) path,
+.mermaid .node:nth-of-type(6n+2) rect { fill: #74c0fc !important; stroke: #1c1c1e !important; }
+.mermaid .node:nth-of-type(6n+3) path,
+.mermaid .node:nth-of-type(6n+3) rect { fill: #69db7c !important; stroke: #1c1c1e !important; }
+.mermaid .node:nth-of-type(6n+4) path,
+.mermaid .node:nth-of-type(6n+4) rect { fill: #ff8787 !important; stroke: #1c1c1e !important; }
+.mermaid .node:nth-of-type(6n+5) path,
+.mermaid .node:nth-of-type(6n+5) rect { fill: #b197fc !important; stroke: #1c1c1e !important; }
+.mermaid .node:nth-of-type(6n+6) path,
+.mermaid .node:nth-of-type(6n+6) rect { fill: #ffa94d !important; stroke: #1c1c1e !important; }
+
+.mermaid .nodeLabel,
+[data-theme="dark"] .mermaid .nodeLabel {
+  font-weight: 700 !important;
+  color: #1c1c1e !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+
+.mermaid .edgePath path { stroke: #1c1c1e !important; stroke-width: 2px !important; }
+.mermaid .edgeLabel {
+  background: #fffdf7 !important;
+  color: #1c1c1e !important;
+  font-weight: 600 !important;
+}
+.mermaid .marker { fill: #1c1c1e !important; stroke: #1c1c1e !important; }

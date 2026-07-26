@@ -172,6 +172,11 @@
 
   renderer.code = function (code, infostring) {
     const raw = (infostring || "").trim().split(/\s+/)[0];
+
+    if (raw === "mermaid") {
+      return `<div class="mermaid">${escapeHtml(code)}</div>\n`;
+    }
+
     const aliasMap = {
       sh: "bash", shell: "bash", zsh: "bash", console: "bash",
       cuda: "cpp", cu: "cpp",
@@ -344,6 +349,29 @@
     contentEl.innerHTML = html;
     document.getElementById("article-header").hidden = false;
     loading.remove();
+
+    if (window.mermaid) {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "base",
+        look: "handDrawn",
+        themeVariables: {
+          fontFamily: "'Space Grotesk', Inter, sans-serif",
+          fontSize: "16px",
+          background: "#fffdf7",
+          primaryColor: "#ffd43b",
+          primaryTextColor: "#1c1c1e",
+          primaryBorderColor: "#1c1c1e",
+          lineColor: "#1c1c1e",
+          secondaryColor: "#74c0fc",
+          tertiaryColor: "#ff8787",
+          edgeLabelBackground: "#fffdf7",
+          clusterBkg: "#f1f3f5",
+          clusterBorder: "#1c1c1e",
+        }
+      });
+      mermaid.run({ querySelector: ".mermaid" });
+    }
 
     // Copy button handler (delegated)
     contentEl.addEventListener("click", (e) => {
