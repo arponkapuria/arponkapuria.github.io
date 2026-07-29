@@ -1,13 +1,13 @@
 ---
-title: Designing a delivery app with AI features for Salesmen
-description: This article walks through the full interview-style design: clarification, requirements, estimation, architecture, deep dives, scaling, and trade-offs — including the alternatives that were considered and rejected, and why.
+title: Designing a Delivery App with AI Features for Salesmen
+description: A step-by-step system design for a delivery app built for a manufacturing company's field salesmen under a tight, unspecified-scope deadline — the kind of rapid, ambiguity-heavy problem seen in Forward Deployed Engineer interviews.
 
 date: July 26, 2026
 modified: July 26, 2026
 
 author: Arpon Kapuria
 category: Dev Journal
-tags: System Design
+tags: System Design, SWE
 ---
 
 ## Problem Statement
@@ -28,11 +28,11 @@ Questions to ask, and reasonable answers to assume if the interviewer pushes the
 | Network conditions? | Salesmen work in the field — assume patchy connectivity. Offline support is a hard requirement. |
 | What AI feature? | Unspecified — the candidate should propose one and justify it. |
 
-### Why these assumptions matter
+#### Why these assumptions matter ?
 
 A two-day deadline and a small user base (500 people) are the two biggest constraints in this problem. They should shape *every* downstream decision: favor monoliths over microservices, batch over real-time, and existing managed services over anything custom.
 
-## Choosing the AI feature
+## AI feature selection
 
 Since the prompt deliberately leaves the AI feature open, the choice itself is being evaluated. Candidates should pick something that:
 
@@ -40,7 +40,7 @@ Since the prompt deliberately leaves the AI feature open, the choice itself is b
 - Has clear, explainable business value
 - Doesn't require infrastructure you don't have time to build in two days (e.g., no real-time GPS/traffic data pipeline)
 
-### Alternatives considered
+#### Alternatives considered ?
 
 | Option | Verdict | Reason |
 |---|---|---|
@@ -113,7 +113,7 @@ flowchart TB
 | Offline queue | Local SQLite on device | In-memory queue only | Survives app kill/restart and phone reboot — a memory-only queue loses data |
 | Forecasting | Decoupled nightly batch job | Real-time inference service | No user-facing feature needs sub-second predictions; decoupling means a forecasting failure can't take down the delivery app |
 
-## Deep dive: Offline sync
+## Deep dive 1: Offline sync
 
 This is the trickiest sub-problem in the design, and the one most interviewers will push on.
 
@@ -147,7 +147,7 @@ sequenceDiagram
 
 **Key framing for the interview:** because each record has a single owner, this is *not* a general distributed-conflict problem (no CRDTs, no vector clocks needed) — it reduces to reliable at-least-once delivery with idempotency. Naming why you *don't* need heavyweight tools is as valuable as naming the tools you do use.
 
-## Deep dive: Demand forecasting
+## Deep dive 2: Demand forecasting
 
 ### 1. Framing
 
