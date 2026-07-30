@@ -16,38 +16,38 @@ tags: Study Plan, Grad Admissions
 
 ## Overview
 
-Target Score (Minimum): Overall `7.5` with no band less than `6`. 
+**Target Score (Minimum):** Overall `7.5` with no band less than `6`. Although it's recommended to get minimum 8 in both reading and listening.
 
-Test Format and Question Types – [Understand the IELTS test format: The ultimate guide](https://youtu.be/tOFm-zoI6-w?si=IPusxVZ6Gzu_FuE3)<br>
-Computer Based IELTS Test – [Quick Guide](https://www.youtube.com/playlist?list=PLsuhejYkZ346s1MXehg91AwGJYwYYLR1Y), [Doubts / Explanations](https://www.youtube.com/playlist?list=PLsuhejYkZ347Ggae0JfQePmbsqJzy8TNm)<br>
-IELTS Band Scores – [How IELTS band scores are calculated](https://ieltsliz.com/ielts-band-scores/)
+**Test Format and Question Types –** [Understand the IELTS test format: The ultimate guide](https://youtu.be/tOFm-zoI6-w?si=IPusxVZ6Gzu_FuE3)<br>
+**Computer Based IELTS Test –** [Quick Guide](https://www.youtube.com/playlist?list=PLsuhejYkZ346s1MXehg91AwGJYwYYLR1Y), [Doubts / Explanations](https://www.youtube.com/playlist?list=PLsuhejYkZ347Ggae0JfQePmbsqJzy8TNm)<br>
+**IELTS Band Scores –** [How IELTS band scores are calculated](https://ieltsliz.com/ielts-band-scores/)
 
 > You can go at your own pace, but it's best to complete the preparation within 20–40 days or at most 2 months. Don't forget to keep a track of everyday progress.
 
 ### Reading
 
-1. Solve the latest 5-10 Cambridge IELTS books.
-2. Use YouTube channels for a quick brush-up on rules, tricks, and basics.
+1. Start by solving the latest **3 / 4 Cambridge IELTS** books. If you're still not hitting your desired score, work backward through the earlier editions. The last 5-10 Cambridge IELTS books should be enough to get you there.
+2. Use YouTube channels *(check bottom)* for a quick refresher on rules, tricks, and basics.
 
 ### Listening
 
-1. Solve the latest 5-10 Cambridge IELTS books.
-2. Refer to YouTube channels for refreshing rules and tricks.
-3. Listen to podcasts like [Lex Fridman](https://www.youtube.com/@lexfridman) or [Andrew Huberman](https://www.youtube.com/@hubermanlab).
+1. Start by solving the latest **3 / 4 Cambridge IELTS** books. If you're still not hitting your desired score, work backward through the earlier editions.
+2. Use YouTube channels *(check bottom)* for a quick refresher on rules, tricks, and basics.
+3. Listen to podcasts like [Lex Fridman](https://www.youtube.com/@lexfridman), [Andrew Huberman](https://www.youtube.com/@hubermanlab) or [BBC Learning English](https://www.youtube.com/@bbclearningenglish/podcasts)
 
 ### Speaking
 
 1. Get familiar with the IELTS [Speaking Band Descriptors](https://takeielts.britishcouncil.org/sites/default/files/ielts_speaking_band_descriptors.pdf) from British Council.
 2. Watch [IELTS Daily](https://www.youtube.com/@IELTSDaily) videos featuring different band scores to grasp the dos and don'ts.
-3. Consider [Makkar's](https://makkarielts.com/) latest book for cue card practice (optional).
-4. Check out Keith’s [Speak Better English](https://www.youtube.com/playlist?list=PLdz6EbLJcjJ9ixS2JC_DDFekyC_jTeVLL) playlist on YouTube (optional).
+3. You can go through [Makkar's](https://makkarielts.com/) latest book for cue card practice *(optional)*.
+4. Check out Keith’s [Speak Better English](https://www.youtube.com/playlist?list=PLdz6EbLJcjJ9ixS2JC_DDFekyC_jTeVLL) playlist on YouTube *(optional)*.
 
 ### Writing
 
 1. Get familiar with the IELTS [Writing Band Descriptors](https://takeielts.britishcouncil.org/sites/default/files/ielts_writing_band_descriptors.pdf) from British Council.
 2. Explore the [IELTS UP](https://www.youtube.com/@ielts-uponlinelessons7695) playlist for comprehensive guidance.
 3. Review Liz's task 1 and task 2 instructions and templates available on her [website](https://ieltsliz.com/).
-4. Read [Rachel Mitchel’s](https://www.amazon.com/IELTS-Writing-Task-Ultimate-Practice/dp/1549683381) book on Writing Task 1 & 2 (optional).
+4. Read [Rachel Mitchel’s](https://www.amazon.com/IELTS-Writing-Task-Ultimate-Practice/dp/1549683381) book on Writing Task 1 & 2 *(optional)*.
 
 ## Tips & Tricks
 
@@ -64,12 +64,35 @@ IELTS Band Scores – [How IELTS band scores are calculated](https://ieltsliz.co
     - You can often catch a hint in the previous sentence before they say the one containing the answer.
 4. **Reading:**
     - Fill in the gaps usually come from the same paragraph or consecutive paragraphs.
-    - For MCQs, True/False/Yes/No/Not Given questions, find the literal meaning of each word.
+    - For MCQs and True/False/Yes/No/Not Given type questions, try to understand the **literal meaning** of each word. 
+    - During my prep, the complex T/F/NG statements used to trip me up constantly — until I came up with this method. I call it `The Chunking Trick`, and it's been a game-changer ever since.
+        ```mermaid
+        flowchart TD
+            A["Statement:<br/>The museum was built in 1990<br/>and is the largest in Europe"] --> B["Chunk it"]
+            B --> C1["Chunk 1:<br/>museum"]
+            B --> C2["Chunk 2:<br/>was"]
+            B --> C3["Chunk 3:<br/>built"]
+            B --> C4["Chunk 4:<br/>1990"]
+            B --> C5["Chunk 5:<br/>is"]
+            B --> C6["Chunk 6:<br/>largest"]
+            B --> C7["Chunk 7:<br/>Europe"]
+            C1 --> D["Check each chunk<br/>against the paragraph"]
+            C2 --> D
+            C3 --> D
+            C4 --> D
+            C5 --> D
+            C6 --> D
+            C7 --> D
+            D --> E{"Result?"}
+            E -->|"All chunks match"| F["TRUE / YES"]
+            E -->|"Any chunk contradicts"| G["FALSE / NO"]
+            E -->|"Any chunk missing or unclear"| H["NOT GIVEN"]
+        ```
     - Complete the first section in 15 minutes, second section in 15-20 minutes and save at least 25 minutes for the third section.
     - Look for synonyms in the MCQ questions.
-    - For Passage 1, answer questions separately.
-    - For Passage 2, answer the questions together—read each paragraph and check its relevance to all related questions.
-    - For Passage 3, mostly try to answer separately but check for questions from the same paragraph.
+    - Passage 1: Answer each question on its own as you go.
+    - Passage 2: Read one paragraph at a time, then check it against all the questions it might relate to before moving on.
+    - Passage 3: Mostly answer question by question, but keep an eye out for multiple questions tied to the same paragraph.
     - You can refer to this [Video by Lilie IELTS](https://youtu.be/2KyxTcL-0ZM?si=YTMYYQQyhsmUHYsU) for an excellent tip on tackling the reading section.
 
 ### Not To Forget

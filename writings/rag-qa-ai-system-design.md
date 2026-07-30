@@ -1,5 +1,5 @@
 ---
-title: Designing a RAG-based Q&A system Over Company Docs 
+title: Designing a RAG-based Q&A System Over Company Docs 
 description: A full system design walkthrough for a retrieval-augmented Q&A system, built incrementally from the simplest possible version to a scaled, production-grade architecture.
 
 date: July 29, 2026

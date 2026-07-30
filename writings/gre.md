@@ -10,7 +10,7 @@ category: Academic Journal
 tags: Study Plan, Grad Admissions
 ---
 
-**G**RE is widely considered as one of the toughest exams in the world, especially for those seeking admission to graduate programs in the United States and Canada. Before starting your GRE prep, make sure the universities you're applying to require it. I took the GRE in June 2024 and scored 313 (Q163, V150). I could have done better but made some mistakes during the Quant section. Nevertheless, here’s my study plan, along with some tips if you’re aiming for a higher score. Let's get started!
+**G**RE is widely considered as one of the toughest exams in the world, especially for those seeking admission to graduate programs in the United States and Canada. Before starting your GRE prep, make sure the universities you're applying to require it. I took the GRE in June 2024 and scored 309 (Q159, V150). I messed up the timing on quant — forgot the second section had 15 questions. Nevertheless, here’s my study plan, along with some tips if you’re aiming for a higher score. Let's get started!
 
 > This note is best viewed on a tablet or desktop. Also `V` refers to Verbal & `Q` refers to Quant.
 
