@@ -128,11 +128,11 @@ a:hover { color: var(--accent); text-decoration: underline; }
   padding: 1rem 1.1rem;
 }
 .toc-title {
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
   font-size: .68rem;
-  color: var(--text-soft);
+  color: var(--text);
   margin: 0 0 .7rem;
 }
 #toc-list {
@@ -141,9 +141,9 @@ a:hover { color: var(--accent); text-decoration: underline; }
   padding: 0;
   counter-reset: toc-counter;
 }
-#toc-list > li:not(.toc-h3) { counter-increment: toc-counter; }
+/* #toc-list > li:not(.toc-h3) { counter-increment: toc-counter; } */
 #toc-list > li:not(.toc-h3) > a::before {
-  content: counter(toc-counter) ". ";
+  /* content: counter(toc-counter) ". "; */
   color: var(--text-soft);
 }
 #toc-list a {

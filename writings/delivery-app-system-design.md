@@ -7,7 +7,7 @@ modified: July 26, 2026
 
 author: Arpon Kapuria
 category: Dev Journal
-tags: System Design, SWE
+tags: System Design, SWE, AI
 ---
 
 ## Problem Statement

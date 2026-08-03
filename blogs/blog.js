@@ -98,7 +98,7 @@
   function readingTime(text) {
     const words = text.trim().split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.round(words / 100));
-    return `${minutes} min read`;
+    return `⏱️\u00A0\u00A0${minutes} min read`;
   }
 
   function escapeHtml(s) {

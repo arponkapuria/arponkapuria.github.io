@@ -19,4 +19,5 @@ Gemfile.lock
 
 # Extra ignores for VS Code
 .DS_Store
+.vscode
 
