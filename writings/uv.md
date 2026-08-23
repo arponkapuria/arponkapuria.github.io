@@ -1,5 +1,5 @@
 ---
-title: UV - Modern Dependency Management 
+title: UV & Modern Python Dependency Management
 description: A beginner-friendly guide to UV, the modern Python package and dependency manager.
 
 date: February 24, 2026

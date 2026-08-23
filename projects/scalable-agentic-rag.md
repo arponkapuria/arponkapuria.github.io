@@ -1,6 +1,6 @@
 ---
 Project: Scalable Agentic RAG Pipeline
-Github: https://github.com/arpon-kapuria/scalable-agentic-rag-pipeline
+Github: https://github.com/arponkapuria/scalable-agentic-rag-pipeline
 ---
 
 <h3>Project Description</h3>

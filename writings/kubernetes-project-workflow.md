@@ -12,7 +12,7 @@ tags: MLOps, Cloud Native
 
 This blog documents a **practical Kubernetes workflow** for deploying a containerized `FastAPI` application using `Docker`, `Minikube` and `kubectl`.  This is a developer-first workflow, optimized for local development and experimentation for beginners.
 
-> Github Repository: [fastapi-k8s-orchestration](https://github.com/arpon-kapuria/fastapi-k8s-orchestration)
+> Github Repository: [fastapi-k8s-orchestration](https://github.com/arponkapuria/fastapi-k8s-orchestration)
 
 ## Start Docker
 

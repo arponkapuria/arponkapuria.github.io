@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Caveat:wght@400..700&family=Major+Mono+Display&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Permanent+Marker&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
@@ -42,21 +43,42 @@
 
     <main class="main">
         <div class="content-container">
-            <p class="greeting"><b>Hey there !</b></p>
-
             <div class="about-container">
-                <div class="bio-image-container">
-                    <div class="bio-text">
-                        <p> I’m Arpon, from Bangladesh — a Computer Science graduate on paper and a traveler at heart. I find joy in building intelligent systems as much as I do in exploring new places, cultures and foods.</p>
-                        
-                        <p class="bio-text" style="margin-top: 10px;"> I graduated with a B.Tech in Computer Science & Engineering from <a href="https://www.nitt.edu/" target="_blank">NIT Trichy</a>, India in 2024. I was a recipient of the ICCR <a href="https://www.iccr.gov.in/" target="_blank">(Indian Council for Cultural Relations)</a> scholarship in 2020. During my undergraduate studies, I interned at <a href="https://www.iitb.ac.in/" target="_blank">IIT Bombay</a>'s <a href="https://www.ee.iitb.ac.in/web/labs/medical-deep-learning-and-artificial-intelligence-lab-medal/" target="_blank">MeDAL</a> Lab, where I worked on contrastive learning methods for self-supervised image representation learning.</p>
+                <header class="bio-header">
+                    <!-- <first-name><strong>Arpon</strong> Kapuria</first-name> -->
+                    
+                    <span class="bio-name">Hi, I'm Arpon.</span>
+                    <br>
+                    <span class="bio-role">Applied AI/ML Engineer, based in Bangladesh.</span>
+                </header>
 
-                        <!-- Currently, I am working as a Research Assistant at the <a href="https://amirl.org/" target="_blank">Advanced Machine Intelligence Research Lab </a>(AMIR Lab) . -->
-                    </div>
+                <div class="bio-image-container">
 
                     <div class="bio-image">
-                        <img id="profile-image" class="modal-image" src="/images/arpon-kapuria-face-gemini.png" alt="gemini-enhanced-self-portrait">
-                        <p class="image-title"> Gemini Enhanced Portrait</p>
+                        <img id="profile-image" class="modal-image" src="/images/arpon-kapuria-face-gemini.png" alt="Portrait of Arpon Kapuria">
+
+                        <!-- <p class="image-title"> Gemini Enhanced Portrait</p> -->
+
+                        <ul class="bio-social">
+                            <li><a href="mailto:arpkapuria@gmail.com" title="Gmail"><i class="ti ti-mail"></i></a></li>
+                            <li><a href="https://github.com/arponkapuria" target="_blank" title="GitHub"><i class="ti ti-brand-github"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/arponkapuria" target="_blank" title="LinkedIn"><i class="ti ti-brand-linkedin"></i></a></li>
+                            <li><a href="https://x.com/_aaaaarrp" target="_blank" title="X (Twitter)"><i class="ti ti-brand-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/arponkapuria" target="_blank" title="Instagram"><i class="ti ti-brand-instagram"></i></a></li>
+                            <li><a href="https://www.facebook.com/arponkapuria" target="_blank" title="Facebook"><i class="ti ti-brand-facebook"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="bio-text">
+                        <p>
+                            I'm a Computer Science graduate on paper and a traveler at heart. I find joy in building intelligent systems as much as I do in exploring new places, cultures and foods.
+                        </p>
+                    
+                        <p> 
+                            I graduated with a B.Tech in Computer Science & Engineering from <a href="https://www.nitt.edu/" target="_blank">NIT Trichy</a>, India in 2024. I was a recipient of the ICCR <a href="https://www.iccr.gov.in/" target="_blank">(Indian Council for Cultural Relations)</a> scholarship in 2020. During my undergraduate studies, I interned at <a href="https://www.iitb.ac.in/" target="_blank">IIT Bombay</a>'s <a href="https://www.ee.iitb.ac.in/web/labs/medical-deep-learning-and-artificial-intelligence-lab-medal/" target="_blank">MeDAL</a> Lab, where I worked on contrastive learning methods for self-supervised image representation learning.
+                        </p>
+
+                        <!-- Currently, I am working as a Research Assistant at the <a href="https://amirl.org/" target="_blank">Advanced Machine Intelligence Research Lab </a>(AMIR Lab) . -->
                     </div>
 
                     <!-- The modal overlay for the enlarged image -->
@@ -66,11 +88,13 @@
                     </div>
                 </div>
 
-                <p class="bio-text" style="margin-top: 10px;">
-                    My interests lie at the intersection of research and engineering. On the engineering side, I build production-ready AI systems around LLMs, RAG, Agentic AI and AI infrastructure, with a particular focus on efficient inference, model serving, evaluation, and scalable deployment. On the research side, I am interested in representation learning, reasoning, factuality, controllable generation  and generalization and what those capabilities unlock for Health, Science and Code. Outside of all these, you'll find me spending an embarrassing amount of time on <a href="https://leetcode.com/u/arpon_" target="_blank">LeetCode</a> / <a href="https://www.deep-ml.com/profile/4WGysk4rhvMuA2rWEkH2KaIHTv93" target="_blank">Deep-ML</a> / <a href="https://leetgpu.com/arpon_" target="_blank">LeetGPU</a>.
+                <p>
+                    My interests lie at the intersection of research and engineering. On the engineering side, I build production-ready AI systems around LLMs, RAG, Agentic AI and AI infrastructure, with a particular focus on efficient inference, serving, evaluation, and scalable deployment. On the research side, I am interested in representation learning, reasoning, factuality, controllable generation  and generalization and what those capabilities unlock for Health, Science and Code. Outside of all these, you'll find me spending an embarrassing amount of time on <a href="https://leetcode.com/u/arpon_" target="_blank">LeetCode</a> / <a href="https://www.deep-ml.com/profile/4WGysk4rhvMuA2rWEkH2KaIHTv93" target="_blank">Deep-ML</a> / <a href="https://leetgpu.com/arpon_" target="_blank">LeetGPU</a>.
                 </p>
 
-                <p class="bio-text" style="margin-top: 10px;">Feel free to reach out if you have an idea to work on or just want to chat about tech, travel or anything !</p>
+                <p>
+                    Feel free to reach out if you have an idea to work on or just want to chat about tech, travel or anything !
+                </p>
 
                 <!-- <p class="bio-text" style="margin-top: 20px;"><strong>Current Projects:</strong></p>
                 <ul style="margin-top: 5px; padding-left: 40px;">
@@ -78,125 +102,115 @@
                     <li>Mental Health-focused LLMs inspired by the Human Cognition process.</li>
                 </ul> -->
 
-                <div class="message">
+                <!-- <div class="message">
                     📢 Open to AI Engineer / ML Engineer / Research Engineer opportunities !
-                </div>
+                </div> -->
 
-            </div>
-
-            <div class="social-links">
-                <ul class="links">
-                    <li><a href="mailto:arpkapuria@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a></li>
-                    <li><a href="https://github.com/arpon-kapuria" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></li>
-                    <li><a href="https://www.linkedin.com/in/arponkapuria" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href="https://www.instagram.com/_aaaaarrp" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="https://www.facebook.com/everythinissoweird" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a></li>
-                </ul>
             </div>
 
             <div class="recent-news-container">
-                <h2 class="greeting">📢 Recent News</h2>
+                <h3 style="margin-bottom: 12px;">📢 Recent News</h3>
 
                 <!-- List goes year wise - Descending order -->
-
-                <div class="news-box">
+                
+                <div>
                     <ul class="news-list">
+                        <!-- 2026 -->
+                        <li>
+                            <span class="news-date">2026 Aug</span>
+                            <span class="news-event">Blog [System Design - 04]: <a href="/blogs/index.html?post=rag-10m-docs-ai-system-design" target="_blank">Designing an LLM Chat Product With Memory and Context Management</a> </span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 Jul</span>
+                            <span class="news-event">Blog [System Design - 03]: <a href="/blogs/index.html?post=rag-10m-docs-ai-system-design" target="_blank">Designing a RAG Pipeline for 10 Million Documents With Near-Zero Hallucination</a> - Got asked in Google L5 interview</span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 Jul</span>
+                            <span class="news-event">Blog [System Design - 02]: <a href="/blogs/index.html?post=rag-qa-ai-system-design" target="_blank">Designing a RAG-based Q&A System Over Company Docs</a></span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 Jul</span>
+                            <span class="news-event">Blog: Kicking off a new System Design series — 01: <a href="/blogs/index.html?post=delivery-app-system-design" target="_blank">Designing a Delivery App with AI Features for Salesmen</a></span>
+                        </li>
                         <li class="news-pinned">
-                            <span class="news-date pinned-date">
-                                2026 | July
-                                <span class="pin-ribbon">Pinned</span>
-                            </span>
+                            <span class="news-date">2026 Jul</span>
+                            <span class="news-event">Launched <a href="https://ai-space-vert.vercel.app/" target="_blank">AI-Space</a> — an Interactive Knowledge Graph of AI concepts.</span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 May</span>
+                            <span class="news-event">Blog: <a href="/blogs/index.html?post=betterdb-rag-observability" target="_blank">RAG Observability and Latency Analysis using BetterDB</a></span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 May</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=aws-nuke" target="_blank">AWS Nuke — The AWS Resources Destroyer</a></span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 Feb</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=uv" target="_blank">UV & Modern Python Dependency Management</a></span>
+                        </li>
+                        <li>
+                            <span class="news-date">2026 Feb</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=kubernetes-project-workflow" target="_blank">Kubernetes Project Workflow — Commands & Mental Model</a></span>
+                        </li>
 
-                            <span class="news-event">
-                                Launched <strong style="color:orangered">AI-Dictionary</strong>, an interactive platform for exploring AI concepts, their relationships, and detailed explanations.
-                                <a href="https://ai-dictionary-vert.vercel.app/" target="_blank">Explore →</a>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | August</span>
-                            <span class="news-event">Part 4 of the System Design series: <a href="/blogs/index.html?post=rag-10m-docs-ai-system-design" target="_blank">Designing an LLM Chat Product With Memory and Context Management</a></span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | July</span>
-                            <span class="news-event">Part 3 of the System Design series: <a href="/blogs/index.html?post=rag-10m-docs-ai-system-design" target="_blank">Designing a RAG Pipeline for 10 Million Documents With Near-Zero Hallucination</a> (Got asked in Google L5 interview)</span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | July</span>
-                            <span class="news-event">Part 2 of the System Design series — this time: <a href="/blogs/index.html?post=rag-qa-ai-system-design" target="_blank">Designing a RAG-based Q&A System Over Company Docs</a></span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | July</span>
-                            <span class="news-event">Kicking off a new System Design series — First up: <a href="/blogs/index.html?post=delivery-app-system-design" target="_blank">Designing a Delivery App with AI Features for Salesmen</a></span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | May</span>
-                            <span class="news-event">Posted an article on <b>RAG Observability and Latency Analysis</b> - <a href="/blogs/index.html?post=betterdb-rag-observability" target="_blank">RAG Observability and Latency Analysis using BetterDB</a> !</span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | May</span>
-                            <span class="news-event">Posted an article on using <b>AWS Nuke</b> to destroy AWS Resources - <a href="../blogs/index.html?post=aws-nuke" target="_blank">AWS Nuke (The Powerful AWS Resources Destroyer)</a> !</span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | February</span>
-                            <span class="news-event">Posted an article on <b>UV</b> (python package manager) and modern dependency management - <a href="../blogs/index.html?post=uv" target="_blank">UV & Modern Dependency Management</a> !</span>
-                        </li>
-                        <li>
-                            <span class="news-date">2026 | February</span>
-                            <span class="news-event">Posted an article on understanding <b>Kubernetes</b> Project Workflow - <a href="../blogs/index.html?post=kubernetes-project-workflow" target="_blank">Kubernetes Project Workflow (Commands & Mental Model)</a> !</span>
-                        </li>
-                    </ul>
-
-                    <ul class="news-list">
+                        <!-- 2025 -->
                         <!-- <li>
-                            <span class="news-date">2025 | November</span>
-                            <span class="news-event">Joined <strong style="color:orangered">AMIR Lab</strong> as a Research Assistant. I will be working on improving reasoning, decision-making and trustworthiness in vision/language models !</span>
+                            <span class="news-date">2025 Nov</span>
+                            <span class="news-event">Joined <strong style="font-weight: bold;">AMIR Lab</strong> as a Research Assistant. I will be working on improving reasoning, decision-making and trustworthiness in vision/language models !</span>
                         </li> -->
                         <li>
-                            <span class="news-date">2025 | October</span>
-                            <span class="news-event">Posted an article on understanding a <b>Dynamic Programming</b> Patterns - <a href="../blogs/index.html?post=dp-patterns-non-adjacent-selection-dp" target="_blank">Non Adjacent Selection DP</a> with code template !</span>
+                            <span class="news-date">2025 Oct</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=dp-patterns-non-adjacent-selection-dp" target="_blank">Dynamic Programming Patterns — Non Adjacent Selection DP</a></span>
                         </li>
                         <li>
-                            <span class="news-date">2025 | July</span>
-                            <span class="news-event">Posted a beginner's guide on <a href="../blogs/index.html?post=open-source-guide" target="_blank">Open Source Contribution</a>, including a contribution to HuggingFace !</span>
+                            <span class="news-date">2025 Jul</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=open-source-guide" target="_blank">Open Source Contribution — Beginner’s Guide</a></span>
                         </li>
                         <li>
-                            <span class="news-date">2025 | June</span>
-                            <span class="news-event">Posted short summaries of three RAG-based papers: <a href="../blogs/index.html?post=rule-reliable-multimodal-rag" target="_blank">RULE</a>, <a href="../blogs/index.html?post=rationale-guided-rag" target="_blank">Rationale Guided RAG</a> and <a href="../blogs/index.html?post=consens-metric" target="_blank">ConSens</a> !</span>
+                            <span class="news-date">2025 Jun</span>
+                            <span class="news-event">Blog: Summaries of RAG-based papers — <a href="../blogs/index.html?post=rule-reliable-multimodal-rag" target="_blank">RULE</a>, <a href="../blogs/index.html?post=rationale-guided-rag" target="_blank">Rationale Guided RAG</a> and <a href="../blogs/index.html?post=consens-metric" target="_blank">ConSens</a></span>
                         </li>
                         <li>
-                            <span class="news-date">2025 | June</span>
-                            <span class="news-event">Launched a <a href="./gallery.html" target="_blank">Gallery</a> section on my website featuring photos from my tours !</span>
+                            <span class="news-date">2025 Jun</span>
+                            <span class="news-event">Launched a <a href="./gallery.html" target="_blank">Gallery</a> section on my website to upload photos from my tours</span>
                         </li>
                         <li>
-                            <span class="news-date">2025 | April</span>
-                            <span class="news-event">Try out this <a href="https://github.com/arpon-kapuria/cold-mail-generator" target="_blank">Cold Email Generator</a> I made using RAG !</span>
+                            <span class="news-date">2025 Apr</span>
+                            <span class="news-event">Try out this <a href="https://github.com/arponkapuria/cold-mail-generator" target="_blank">Cold Email Generator</a> I made using RAG </span>
                         </li>
-                    </ul>
 
-                    
-                    <ul class="news-list">
+                        <!-- 2024 -->
                         <li>
-                            <span class="news-date">2024 | November</span>
-                            <span class="news-event">Posted an article on <a href="../blogs/index.html?post=ielts" target="_blank">IELTS Preparation</a> including materials and study plan !</span>
+                            <span class="news-date">2024 Nov</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=ielts" target="_blank">IELTS Preparation — How I Prepared / Preparation Guide & Materials</a></span>
                         </li>
+                        <!-- <li>
+                            <span class="news-date">2024 Nov</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=gre" target="_blank">GRE Preparation — How I Prepared / Preparation Guide & Materials</a></span>
+                        </li> -->
                         <li>
-                            <span class="news-date">2024 | November</span>
-                            <span class="news-event">Posted an article on step-by-step <a href="../blogs/index.html?post=gre" target="_blank">GRE Preparation</a> with materials and strategies !</span>
+                            <span class="news-date">2024 Aug</span>
+                            <span class="news-event">Graduated from <a href="https://www.nitt.edu/home/" target="_blank">NIT Trichy</a>, India with a B.Tech in CSE</span>
                         </li>
-                        <li>
-                            <span class="news-date">2024 | August</span>
-                            <span class="news-event">Graduated from <strong style="color: orangered;">NIT Trichy</strong>, India with a B.Tech degree in Computer Science and Engineering.</span>
-                        </li>
-                    </ul>
 
-                    <ul class="news-list">
+                        <!-- 2023 -->
                         <li>
-                            <span class="news-date">2023 | November</span>
-                            <span class="news-event">Posted a short note on <a href="../blogs/index.html?post=ssl" target="_blank">Self Supervised Learning (SSL) !</a></span>
+                            <span class="news-date">2023 Nov</span>
+                            <span class="news-event">Blog: <a href="../blogs/index.html?post=ssl" target="_blank">An Introduction to Self Supervised Learning</a></span>
                         </li>
                         <li>
-                            <span class="news-date">2023 | May</span>
-                            <span class="news-event"> Will be spending the summer at <strong style="color: orangered;">IIT Bombay</strong> as a Summer Research Intern !</span>
+                            <span class="news-date">2023 May</span>
+                            <span class="news-event"> Will be joining <a href="https://www.iitb.ac.in">IIT Bombay</a> as a Summer Research Intern at MeDAL Lab</span>
+                        </li>
+                        
+                        <!-- 2020 -->
+                        <li>
+                            <span class="news-date">...</span>
+                            <span class="news-event"></span>
+                        </li>
+                        <li>
+                            <span class="news-date">2020 Dec</span>
+                            <span class="news-event"> A new chapter: Recipient of the <a href="https://iccr.gov.in/iccr-scholarship/indian-council-cultural-relations-scholarship">ICCR Scholarship</a></span>
                         </li>
                     </ul>
                 </div>

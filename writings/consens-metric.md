@@ -73,4 +73,4 @@ This makes the contrast sharper and the score more reflective of actual groundin
 ## References
 
 - **Paper:** Vankov, I., Ivanov, M., Correia, A., & Botev, V. (2025). *ConSens: Assessing Context Grounding in Open-Book Question Answering*. arXiv:2505.00065. [Paper](https://arxiv.org/abs/2505.00065)
-- **Implementation:** ConSens Metric Implementation — [GitHub Notebook](https://github.com/arpon-kapuria/notebooks/blob/main/conSens.ipynb)
+- **Implementation:** ConSens Metric Implementation — [GitHub Notebook](https://github.com/arponkapuria/notebooks/blob/main/conSens.ipynb)

@@ -1,5 +1,5 @@
 ---
-title: AWS Nuke - AWS Resources Destroyer
+title: AWS Nuke - The AWS Resources Destroyer
 description: Hands on with a tool designed to delete all resources in an AWS account in one go.
 
 date: May 02, 2026

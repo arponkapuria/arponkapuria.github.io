@@ -22,7 +22,7 @@ The workflow covers:
 
 The stack combines FastAPI, Redis/Valkey, sentence-transformers embeddings, OpenRouter-hosted LLM inference, and BetterDB telemetry to analyze how different pipeline components contribute to overall response latency.
 
-> Github Repository: [betterdb-rag-observability](https://github.com/arpon-kapuria/betterdb-rag-observability)
+> Github Repository: [betterdb-rag-observability](https://github.com/arponkapuria/betterdb-rag-observability)
 
 ## Architecture
 
