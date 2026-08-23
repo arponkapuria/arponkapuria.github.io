@@ -154,6 +154,11 @@ body.light-theme .theme-toggle #icon-sun circle { fill: currentColor; stroke: no
   white-space: nowrap;
   flex-shrink: 0;
 }
+
+/* About Me: hide logo and keep right controls on the right */
+.about-page .navbar-logo {
+  display: none;
+}
  
 /* ---------- Nav links (desktop row) ---------- */
 .navbar-links {
@@ -262,6 +267,13 @@ body.light-theme .theme-toggle #icon-sun circle { fill: currentColor; stroke: no
 }
 
 @media (max-width: 860px) {
+  .about-page .navbar-container {
+    justify-content: flex-end;
+  }
+
+  .about-page .navbar-right {
+    margin-left: 0;
+  }
  
   .navbar-container {
     padding: 0 1.1rem;
@@ -670,7 +682,7 @@ a:hover {
 /* Each news item — added a leading gutter column reserved for the pin icon */
 .news-list li {
     display: grid;
-    grid-template-columns: 25px 95px 1fr;
+    grid-template-columns: 22px 95px 1fr;
     column-gap: 2px;
     margin-bottom: 0.5rem;
     align-items: start;
@@ -718,9 +730,9 @@ a:hover {
     .news-date {
         padding-left: 0px;
     }
-    .news-list li {
+    /* .news-list li {
         grid-template-columns: 25px 90px 1fr;
-    }
+    } */
 }
 /* ========================================================================
                             EXPERIENCE & PROJECTS
