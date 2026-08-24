@@ -15,11 +15,13 @@
     --color-dark-text: #b9b8b8;
     --color-dark-lighter-text: #c6c9ce;
     --color-dark-section-border: #ddd;
+    --color-dark-shallow-border: rgba(255, 255, 255, 0.1);
 
     /* Light theme */
     --color-light-bg: #ffffff;
     --color-light-text: #1c1c1e;
     --color-light-bright-link-title: #2a75ab;
+    --color-light-shallow-border: rgba(3, 3, 3, 0.1);
 
     /* Common colors */
     --color-secondary-text: #6b6b6b;
@@ -33,7 +35,7 @@
     --font-logo: "Major Mono Display", monospace, 'Permanent Marker', cursive;
     --font-bio-title: "Caveat", 'Reenie Beanie', 'cursive', 'Crimson Pro', serif;
     --font-mono: ui-monospace, SFMono-Regular, monospace, "SF Mono", Menlo, Consolas;
-    --font-footer: "Iceland", 'Spectral', sans-serif;
+    --font-footer: 'Spectral', sans-serif;
 
     --blog-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
     --blog-font-serif: "Charter", "Iowan Old Style", "Georgia", "Times New Roman", serif;
@@ -266,7 +268,7 @@ body.light-theme .theme-toggle #icon-sun circle { fill: currentColor; stroke: no
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 920px) {
   .about-page .navbar-container {
     justify-content: flex-end;
   }
@@ -276,7 +278,7 @@ body.light-theme .theme-toggle #icon-sun circle { fill: currentColor; stroke: no
   }
  
   .navbar-container {
-    padding: 0 1.1rem;
+    padding: 0 calc(clamp(10px, 4vw, 20px) + clamp(7px, 3vw, 35px));
   }
  
   /* Show hamburger */
@@ -1147,7 +1149,6 @@ a:hover {
     gap: 1.2rem;
     max-width: 900px;
     margin: 0 auto 2rem auto;
-    padding: 0 1rem;
 }
 .gallery-item {
     position: relative;
@@ -1265,13 +1266,39 @@ a:hover {
                                 FOOTER CONTAINER
    ======================================================================== */
 
-.footer-container {
-    margin: 0;
-    padding: 3rem 0 1.5rem;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.95rem;
-    font-family: var(--font-main);
+.site-footer {
+  margin-top: 5rem;
+}
+
+.site-footer::before {
+  content: "";
+  display: block;
+  width: calc(100% + 2 * clamp(10px, 4vw, 20px));
+  margin-left: calc(-1 * clamp(10px, 4vw, 20px));
+  border-top: 1px solid var(--color-dark-shallow-border);
+}
+
+.site-footer-inner {
+  font-family: var(--font-footer);
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 2rem clamp(7px, 3vw, 35px) 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+.site-footer-inner a {
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.site-footer-inner a:hover {
+  text-decoration: underline;
 }
 
 /* ========================================================================
@@ -1327,4 +1354,8 @@ body.light-theme .article-content h3 {
 
 body.light-theme .gallery-caption h3 {
     color: var(--color-light-bg);
+}
+
+body.light-theme .site-footer::before {
+  border-top: 1px solid var(--color-light-shallow-border);
 }

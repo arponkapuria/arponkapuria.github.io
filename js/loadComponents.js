@@ -59,7 +59,11 @@ function initLayout() {
     }
   });
 
-  loadComponent("footer", "/components/footer.html");
+  loadComponent("footer", "/components/footer.html", () => {
+    if (window.UI) {
+      UI.initLastUpdated();
+    }
+  });
 }
 
 // Entry point

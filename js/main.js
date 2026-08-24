@@ -295,6 +295,34 @@ window.UI = (function () {
 		});
 	}
 
+	// Fetches and renders the "last updated" date in the footer, with 1-day caching
+	function initLastUpdated() {
+		const el = document.getElementById("last-updated");
+		if (!el) return;
+
+		const cached = localStorage.getItem("lastUpdated");
+		const cachedAt = localStorage.getItem("lastUpdatedAt");
+		const oneDay = 24 * 60 * 60 * 1000;
+
+		if (cached && cachedAt && Date.now() - cachedAt < oneDay) {
+			el.textContent = cached;
+			return;
+		}
+
+		fetch("https://api.github.com/repos/arponkapuria/arponkapuria.github.io/commits?per_page=1")
+			.then(res => res.json())
+			.then(data => {
+				const date = new Date(data[0].commit.committer.date);
+				const formatted = date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+				el.textContent = formatted;
+				localStorage.setItem("lastUpdated", formatted);
+				localStorage.setItem("lastUpdatedAt", Date.now());
+			})
+			.catch(() => {
+				el.textContent = "recently";
+			});
+	}
+
 	// Calculates blog reading time dynamically
 	function initReadingTime() {
 
@@ -344,18 +372,19 @@ window.UI = (function () {
 
 	// Initializes page-specific features
 	function initPage() {
-			initNavbarToggle();
-			initThemeToggle();
-			initImageModal();
-			// initProfileSlideshow();
-			initGallery();
-			initArticleFilters();
-			initReadingTime();
-		}
+		initNavbarToggle();
+		initThemeToggle();
+		initImageModal();
+		// initProfileSlideshow();
+		initGallery();
+		initArticleFilters();
+		initReadingTime();
+	}
 
 	return {
 		initNavbarToggle,
 		initThemeToggle,
+		initLastUpdated,
 		initPage
 	};
 
