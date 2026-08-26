@@ -10,7 +10,7 @@ category: Academic Journal
 tags: Study Plan, Grad Admissions
 ---
 
-**I**ELTS can be challenging for non-native english speakers but it didn’t feel like a grind for me, perhaps because I spent nearly four years in South India, where English was my primary medium of communication or because I had taken the GRE exam before the IELTS. I gave Computer Based Test and scored an overall 7.5. Here’s my study plan, along with some tips if you’re aiming even higher. Let's get started! 
+**I**ELTS can be challenging for non-native english speakers, which is why preparation requires more than simply knowing English—it takes the right strategy, consistent practice and a clear understanding of the test format. I gave Computer Based Test and scored an overall 7.5. Here’s my study plan, along with some tips if you’re aiming even higher. Let's get started! 
 
 > This note is best viewed on a tablet or desktop.
 
