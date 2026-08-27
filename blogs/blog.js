@@ -260,7 +260,12 @@
     document.title = pageTitle;
 
     const url = window.location.href;
-    const image = meta.image ? meta.image : "../images/og-default.png";
+    const imagePath = meta.image ? meta.image : "../images/og-default.png";
+    const image = new URL(imagePath, url).href;
+
+    const keywords = Array.isArray(meta.tags) && meta.tags.length
+      ? meta.tags.join(", ")
+      : "AI engineering, machine learning, LLM, RAG, MLOps";
 
     const set = (id, val) => {
       const el = document.getElementById(id);
@@ -271,10 +276,12 @@
     };
 
     set("meta-description", descriptionText);
+    set("meta-keywords", keywords);
     set("og-title", meta.title || pageTitle);
     set("og-description", descriptionText);
     set("og-url", url);
     set("og-image", image);
+    set("og-image-alt", meta.title || "Arpon Kapuria blog");
     set("twitter-title", meta.title || pageTitle);
     set("twitter-description", descriptionText);
     set("twitter-image", image);
