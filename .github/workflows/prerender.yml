@@ -28,6 +28,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog/posts
+          git add blogs/posts
           git diff --staged --quiet || git commit -m "chore: regenerate prerendered blog metadata"
           git push
