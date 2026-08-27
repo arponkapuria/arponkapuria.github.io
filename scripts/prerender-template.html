@@ -4,44 +4,111 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{TITLE}}</title>
-<meta name="description" content="{{DESCRIPTION}}">
+<meta name="description" id="meta-description" content="{{DESCRIPTION}}">
 <meta name="author" content="Arpon Kapuria">
 {{KEYWORDS_TAG}}
 <meta name="robots" content="index, follow">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Arpon Kapuria">
-<meta property="og:title" content="{{OG_TITLE}}">
-<meta property="og:description" content="{{DESCRIPTION}}">
-<meta property="og:url" content="{{URL}}">
-<meta property="og:image" content="{{IMAGE}}">
+<meta property="og:title" id="og-title" content="{{OG_TITLE}}">
+<meta property="og:description" id="og-description" content="{{DESCRIPTION}}">
+<meta property="og:url" id="og-url" content="{{URL}}">
+<meta property="og:image" id="og-image" content="{{IMAGE}}">
 {{IMAGE_DIMENSIONS}}
-<meta property="og:image:alt" content="{{IMAGE_ALT}}">
+<meta property="og:image:alt" id="og-image-alt" content="{{IMAGE_ALT}}">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{OG_TITLE}}">
-<meta name="twitter:description" content="{{DESCRIPTION}}">
-<meta name="twitter:image" content="{{IMAGE}}">
+<meta name="twitter:title" id="twitter-title" content="{{OG_TITLE}}">
+<meta name="twitter:description" id="twitter-description" content="{{DESCRIPTION}}">
+<meta name="twitter:image" id="twitter-image" content="{{IMAGE}}">
 <meta name="twitter:creator" content="@_aaaaarrp">
 
-<meta property="article:published_time" content="{{PUBLISHED}}">
-<meta property="article:modified_time" content="{{MODIFIED}}">
+<meta property="article:published_time" id="meta-published" content="{{PUBLISHED}}">
+<meta property="article:modified_time" id="meta-modified" content="{{MODIFIED}}">
 <meta property="article:author" content="Arpon Kapuria">
-<meta property="article:section" content="{{CATEGORY}}">
+<meta property="article:section" id="meta-category" content="{{CATEGORY}}">
 
-<link rel="canonical" href="{{URL}}">
+<link rel="canonical" id="meta-canonical" href="{{URL}}">
+<link rel="icon" href="/images/favicon.ico">
 
-<!-- Instant client-side redirect to the real interactive viewer -->
-<script>
-  window.location.replace("/blogs/index.html?post={{SLUG}}");
-</script>
-<meta http-equiv="refresh" content="0; url=/blogs/index.html?post={{SLUG}}">
+<link rel="stylesheet" href="/blogs/blog.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.10/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.10/katex.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
 </head>
 <body>
-  <noscript>
-    <h1>{{OG_TITLE}}</h1>
-    <p>{{DESCRIPTION}}</p>
-    <p><a href="/blogs/index.html?post={{SLUG}}">Read the full post</a></p>
-  </noscript>
+
+<header class="site-header">
+  <a class="brand" href="/blogs.html">blogs</a>
+  <span class="sep">|</span>
+  <a class="brand-name" href="/index.html">Arpon Kapuria</a>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+    <svg id="icon-sun" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4"/><g stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></g></svg>
+    <svg id="icon-moon" viewBox="0 0 24 24" width="18" height="18"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</header>
+
+<div class="layout">
+  <aside class="toc-wrap">
+    <nav id="toc" class="toc" aria-label="Table of contents">
+      <p class="toc-title">Table of Contents</p>
+      <ol id="toc-list"></ol>
+    </nav>
+  </aside>
+
+  <main class="article" id="article-root">
+    <div id="loading" class="loading">Loading…</div>
+
+    <header class="article-header" id="article-header" hidden>
+      <h1 id="article-title"></h1>
+      <p class="article-description" id="article-description"></p>
+      <div class="article-meta">
+        <span id="article-date"></span>
+        <span class="dot">•</span>
+        <span id="article-readtime"></span>
+      </div>
+    </header>
+
+    <article id="article-content" class="markdown-body"></article>
+  </main>
+
+  <aside class="toc-spacer" aria-hidden="true"></aside>
+</div>
+
+<script>
+  window.__POST_SLUG__ = "{{SLUG}}";
+</script>
+<script src="/blogs/blog.js"></script>
+
+<button id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="18" height="18">
+    <path d="M12 18V6M6 12l6-6 6 6"/>
+  </svg>
+</button>
+
+<noscript>
+  <p>{{OG_TITLE}} — {{DESCRIPTION}}</p>
+</noscript>
+
 </body>
 </html>

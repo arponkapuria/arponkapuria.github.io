@@ -1,12 +1,14 @@
 /* ============================================================
-   blog.js — renders a single markdown post into article.html
-   Usage: blogs/posts/slug-of-file   (file = writings/slug-of-file.md)
+   blog.js — renders a single markdown post.
+   Slug comes from either an embedded window.__POST_SLUG__ (used by
+   prerendered /blogs/posts/<slug>/ pages) or the ?post= query param
+   (legacy route via /blogs/index.html?post=slug, still supported).
    ============================================================ */
 
 (function () {
   "use strict";
 
-  const WRITINGS_DIR = "../writings/";
+  const WRITINGS_DIR = "/writings/"; // absolute — must work regardless of page depth
 
   /* ---------------- Theme ---------------- */
   const root = document.documentElement;
@@ -41,17 +43,7 @@
     localStorage.setItem("blog-theme", next);
   });
 
-  /* ---------------- Frontmatter parsing ----------------
-     ---
-     title: My Post
-     description: Something
-     date: 2026-01-15
-     modified: 2026-01-20
-     author: Arpon Kapuria
-     category: AI Engineering
-     tags: [rag, llm, mlops]
-     ---
-  -------------------------------------------------------- */
+  /* ---------------- Frontmatter parsing ---------------- */
   function parseFrontmatter(raw) {
     const fmMatch = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
     if (!fmMatch) return { meta: {}, body: raw };
@@ -112,19 +104,19 @@
     return match ? match[1] : null;
   }
 
-  /* ---------------- Math protection (must run before marked) ----------------
-     marked.js will corrupt LaTeX (underscores → <em>, etc.) if we let it see
-     raw $ delimiters. So we extract all math spans first, replace with opaque
-     tokens, parse markdown, then render with KaTeX and splice back in.
-  --------------------------------------------------------------------------- */
+  function getSlug() {
+    if (window.__POST_SLUG__) return window.__POST_SLUG__;
+    const params = new URLSearchParams(window.location.search);
+    return params.get("post");
+  }
+
+  /* ---------------- Math protection ---------------- */
   function protectMath(src) {
     const stash = [];
-    // Display math $$...$$ first (greedy would eat inline, so do display first)
     src = src.replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => {
       stash.push({ display: true, content: m });
       return `\x02MATH${stash.length - 1}\x03`;
     });
-    // Inline math $...$  (single line only, no nested $)
     src = src.replace(/\$([^\$\n]+?)\$/g, (_, m) => {
       stash.push({ display: false, content: m });
       return `\x02MATH${stash.length - 1}\x03`;
@@ -144,7 +136,6 @@
   }
 
   function processImageSizes(src) {
-    // ![alt|400](url) or ![alt|400x300](url)
     return src.replace(
       /!\[([^\]]*?)\|(\d+)(?:x(\d+))?\]\(([^)]+)\)/g,
       (_, alt, w, h, url) => {
@@ -155,7 +146,7 @@
   }
 
   /* ---------------- Markdown renderer setup ---------------- */
-  const headingRegistry = []; // {level, text, id}
+  const headingRegistry = [];
 
   const renderer = new marked.Renderer();
 
@@ -237,7 +228,6 @@
       list.appendChild(li);
     }
 
-    // Scrollspy
     const links = list.querySelectorAll("a");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -266,7 +256,7 @@
 
     const url = window.location.href;
     const rawImage = meta.image || extractFirstImage(body || "");
-    const imagePath = rawImage || "../images/android-chrome-512x512.png";
+    const imagePath = rawImage || "/images/android-chrome-512x512.png";
     const image = new URL(imagePath, url).href;
 
     const set = (id, val) => {
@@ -279,7 +269,6 @@
 
     set("meta-description", descriptionText);
 
-    // Only set keywords when real tags exist — no invented generic fallback
     if (Array.isArray(meta.tags) && meta.tags.length) {
       set("meta-keywords", meta.tags.join(", "));
     }
@@ -301,7 +290,6 @@
   /* ---------------- Back to Top ---------------- */
   function initBackToTop() {
     const button = document.getElementById("back-to-top");
-
     if (!button) return;
 
     window.addEventListener("scroll", () => {
@@ -309,17 +297,13 @@
     });
 
     button.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
   /* ---------------- Main ---------------- */
   async function init() {
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get("post");
+    const slug = getSlug();
     const root = document.getElementById("article-root");
     const loading = document.getElementById("loading");
 
@@ -343,7 +327,6 @@
 
     setMeta(meta, description, body);
 
-    // Protect math before marked sees it, then restore after
     const { src: safeSrc, stash } = protectMath(body);
     const sized = processImageSizes(safeSrc);
     const rawHtml = marked.parse(sized);
@@ -387,7 +370,6 @@
       mermaid.run({ querySelector: ".mermaid" });
     }
 
-    // Copy button handler (delegated)
     contentEl.addEventListener("click", (e) => {
       if (!e.target.matches(".copy-btn")) return;
       const block = e.target.closest(".code-block");
