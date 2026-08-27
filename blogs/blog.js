@@ -107,6 +107,11 @@
     }[c]));
   }
 
+  function extractFirstImage(body) {
+    const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
+    return match ? match[1] : null;
+  }
+
   /* ---------------- Math protection (must run before marked) ----------------
      marked.js will corrupt LaTeX (underscores → <em>, etc.) if we let it see
      raw $ delimiters. So we extract all math spans first, replace with opaque
@@ -255,17 +260,14 @@
   }
 
   /* ---------------- Metadata injection ---------------- */
-  function setMeta(meta, descriptionText) {
+  function setMeta(meta, descriptionText, body) {
     const pageTitle = `${meta.title || "Untitled"} | Arpon Kapuria`;
     document.title = pageTitle;
 
     const url = window.location.href;
-    const imagePath = meta.image ? meta.image : "../images/og-default.png";
+    const rawImage = meta.image || extractFirstImage(body || "");
+    const imagePath = rawImage || "../images/android-chrome-512x512.png";
     const image = new URL(imagePath, url).href;
-
-    const keywords = Array.isArray(meta.tags) && meta.tags.length
-      ? meta.tags.join(", ")
-      : "AI engineering, machine learning, LLM, RAG, MLOps";
 
     const set = (id, val) => {
       const el = document.getElementById(id);
@@ -276,7 +278,12 @@
     };
 
     set("meta-description", descriptionText);
-    set("meta-keywords", keywords);
+
+    // Only set keywords when real tags exist — no invented generic fallback
+    if (Array.isArray(meta.tags) && meta.tags.length) {
+      set("meta-keywords", meta.tags.join(", "));
+    }
+
     set("og-title", meta.title || pageTitle);
     set("og-description", descriptionText);
     set("og-url", url);
@@ -334,7 +341,7 @@
     const { meta, body } = parseFrontmatter(raw);
     const description = meta.description || "";
 
-    setMeta(meta, description);
+    setMeta(meta, description, body);
 
     // Protect math before marked sees it, then restore after
     const { src: safeSrc, stash } = protectMath(body);
