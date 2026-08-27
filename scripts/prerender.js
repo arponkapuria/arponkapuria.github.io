@@ -9,7 +9,7 @@ const SITE_URL = "https://arponkapuria.github.io";
 const WRITINGS_DIR = path.join(__dirname, "..", "writings");
 const OUTPUT_DIR = path.join(__dirname, "..", "blogs", "posts");
 const TEMPLATE_PATH = path.join(__dirname, "prerender-template.html");
-const DEFAULT_IMAGE = `${SITE_URL}/images/android-chrome-512x512.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/images/android-chrome-192x192.png`;
 const IMAGE_BASE = `${SITE_URL}/blogs/index.html`;
 
 function resolveImageUrl(raw) {
