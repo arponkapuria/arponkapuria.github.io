@@ -1,6 +1,6 @@
 /* ============================================================
    blog.js — renders a single markdown post into article.html
-   Usage: article.html?post=slug-of-file   (file = writings/slug-of-file.md)
+   Usage: blogs/posts/slug-of-file   (file = writings/slug-of-file.md)
    ============================================================ */
 
 (function () {
