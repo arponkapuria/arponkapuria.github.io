@@ -23,9 +23,17 @@ This phase does the obvious next thing: stop throwing away Key/Value tensors tha
 
 ## Why a Token's Key/Value Never Changes
 
+![Without KV Cache - Full Recomputation|500](/images/blogs/microserve/phase-1-wo-kv-cache.jpg)
+
+*Source: [Medium](https://medium.com/@aminfadaeinejad.edu/17-unlocking-fast-llm-inference-a-deep-dive-into-kv-caching-648ea1674099)*
+
 A token's Key and Value depend only on that token and everything before it — not on anything generated afterward. So token 5's Key/Value at decode step 20 is identical to what it was at decode step 6. Computing it again is pure waste. The KV cache is the direct consequence of that fact: compute each token's K/V once, keep them, reuse them.
 
 ## Prefill and Decode as Two Different Steps
+
+![KV Cache - Prefill vs Decode|500](/images/blogs/microserve/phase-2-kv-cache.jpg)
+
+*Source: [Medium](https://medium.com/@aminfadaeinejad.edu/17-unlocking-fast-llm-inference-a-deep-dive-into-kv-caching-648ea1674099)*
 
 Unlike the naive loop — where every step is shaped like a full prefill — the cached loop treats the first forward pass differently from every step after it:
 
