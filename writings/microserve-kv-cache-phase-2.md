@@ -16,9 +16,9 @@ Phase 1 built the naive decode loop on purpose: recompute the entire sequence fr
 
 This phase does the obvious next thing: stop throwing away Key/Value tensors that haven't changed, and reuse them instead. No custom memory layout, no block allocation — that's Phase 5's job. This phase is isolated to one question, and only one: what happens when recomputation goes away?
 
-> **This post is Phase 2:** the KV cache. Same four prompts as Phase 1, same everything else — only the engine changes (adds KV Cache). The receipts showing exactly what that one change buys.
+> **This post is Phase 02:** the KV cache. Same four prompts as Phase 1, same everything else — only the engine changes (adds KV Cache). The receipts showing exactly what that one change buys.
 >
-> Phase 01: [Building an LLM Inference Engine (MicroServe) — Phase 1: The Naive Inference Path](/blogs/posts/microserve-naive-inference-phase-1/)
+> **Phase 01:** [Building an LLM Inference Engine (MicroServe) — The Naive Inference Path](/blogs/posts/microserve-naive-inference-phase-1/)
 
 
 ## Why a Token's Key/Value Never Changes
@@ -34,19 +34,19 @@ Unlike the naive loop — where every step is shaped like a full prefill — the
 
 ```python
 outputs = model(input_ids=input_ids, use_cache=True)
-past_key_values = outputs.past_key_values          # prefill: full prompt in, full cache out
+past_key_values = outputs.past_key_values   # prefill: full prompt in, full cache out
 
 for _ in range(config.max_new_tokens):
     next_token = pick_next_token(outputs.logits[:, -1, :], config)
     outputs = model(
-        input_ids=next_token,                        # decode: exactly one new token in
+        input_ids=next_token,                   # decode: exactly one new token in
         past_key_values=past_key_values,
         use_cache=True,
     )
-    past_key_values = outputs.past_key_values         # cache grows by one token's K/V
+    past_key_values = outputs.past_key_values       # cache grows by one token's K/V
 ```
 
-This mirrors how real serving engines think about the two phases: prefill is compute-bound (it touches every prompt token once, in parallel), decode is bandwidth-bound (it touches exactly one new token per step, but has to read the whole growing cache to do it). Making that split explicit in the code — not just implicit in performance — is the point of this phase.
+This mirrors how real serving engines think about the two phases: prefill is compute-bound (*it touches every prompt token once, in parallel*), decode is bandwidth-bound (*it touches exactly one new token per step, but has to read the whole growing cache to do it*). Making that split explicit in the code — not just implicit in performance — is the point of this phase.
 
 ## Why This Turns O(n²) Into O(n)
 
@@ -76,7 +76,7 @@ _ = cached_generate(model, tokenizer, "Hello", warmup_config)
 
 ### Phase 1 vs Phase 2, side by side
 
-![Naive vs KV Cache comparison](../benchmarks/results/naive_vs_kv_cache.png)
+![Naive vs KV Cache comparison|600](/images/blogs/microserve/naive_vs_kv_cache.png)
 
 ### The 101-token request is the headline number
 
@@ -84,7 +84,7 @@ Phase 1's worst case — the "explain a KV cache" prompt, 101 generated tokens �
 
 ### The stalls are gone, not just smaller
 
-![Inter-token latency per request, KV cache decode](../benchmarks/results/kv_cache_itl.png)
+![Inter-token latency per request, KV cache decode|600](/images/blogs/microserve/kv_cache_itl.png)
 
 Phase 1's naive P3 destabilized in two isolated bursts — 1,488ms and 2,794ms back-to-back around token 37, then a smaller 1,382ms spike near token 80 — against an otherwise steady 12–91ms band. The cached version shows neither: a bounded band, roughly 9–36ms across all 100 inter-token gaps, no spikes anywhere. Good evidence the diagnosis was right, not just plausible — removing only the recomputation removed the entire failure mode.
 

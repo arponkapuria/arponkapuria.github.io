@@ -272,7 +272,7 @@ kubectl delete rs <replicaset-name>
 
 ## Mental Model Summary
 
-![Rationale-Guided-RAG Algorithm|800](../images/blogs/kubernetes-mental-model.png)
+![Rationale-Guided-RAG Algorithm|800](/images/blogs/kubernetes-mental-model.png)
 
 <hr>
 

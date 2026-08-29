@@ -20,7 +20,7 @@ Supervised learning is trained over a specific task with a large manually labele
 
 It requires less labeled data and enables learning from unlabelled data. Although it can require more computations and may not perform as well as Supervised Learning on some specific tasks.
 
-![SSL|600](../images/blogs/intro-to-ssl/Untitled.png)
+![SSL|600](/images/blogs/intro-to-ssl/Untitled.png)
 
 > **Differences between Unsupervised Learning and Self Supervise Learning ?**
 > 
@@ -52,7 +52,7 @@ MoCo is short for momentum contrast, which is a method for updating network para
 
 Three versions of this technique have been published so far.
 
-![MoCo|400](../images/blogs/intro-to-ssl/Untitled%201.png)
+![MoCo|400](/images/blogs/intro-to-ssl/Untitled%201.png)
 
 > **MoCo v1**
 >
@@ -70,7 +70,7 @@ Three versions of this technique have been published so far.
       
 Its basic working principle is to maximise the agreement between different augmented versions of the same sample using a contrastive loss in the latent space. Large batch sizes used here and TPUs to generate sufficient number of negative pairs.
 
-![SimCLR|600](../images/blogs/intro-to-ssl/Untitled%202.png)
+![SimCLR|600](/images/blogs/intro-to-ssl/Untitled%202.png)
 
 The SimCLR model consists of the following modules:
 
@@ -79,31 +79,31 @@ The SimCLR model consists of the following modules:
 3. Projection Head
 4. Contrastive loss function
 
-![SimCLR|600](../images/blogs/intro-to-ssl/Untitled%203.png)
+![SimCLR|600](/images/blogs/intro-to-ssl/Untitled%203.png)
       
 ### BYOL (2020)
       
 BYOL short for Bootstrap Your Own Latent. Unlike other contrastive methods, it doesn’t use negative pairs. Instead, it uses two networks that learn from each other to iteratively bootstrap the representations by forcing one network(online) to use an augmented view of an image to predict the output of the other network(target) for a different augmented view of the same image.
 
-![BYOL|600](../images/blogs/intro-to-ssl/Untitled%204.png)
+![BYOL|600](/images/blogs/intro-to-ssl/Untitled%204.png)
       
 ### SwAV (2021)
       
 SwAV is a self-supervised learning algorithm that begins with input images and applies multi-crop augmentations to generate multiple views. These views are processed by a network, resulting in feature vectors that capture image representations. The algorithm then learns prototype vectors, which represent cluster centres. Assigning clusters is achieved by predicting assignment vectors for each view, indicating the probability of belonging to each prototype. To refine the assignments, a swapping process is employed to align and enhance the consistency of cluster assignments across different views of the same image. Finally, the network leverages the feature vectors and refined assignments to predict and learn meaningful visual representations
 
-![SwAV|600](../images/blogs/intro-to-ssl/Untitled%205.png)
+![SwAV|600](/images/blogs/intro-to-ssl/Untitled%205.png)
       
 ### Barlow Twins (2021)
       
 Here the visual representation learning is done by introducing a new objective function that naturally avoids collapse by calculating the cross correlation matrix between the outputs of two identical networks fed with the distorted views of a sample, and making it as close to the identity matrix as possible. This causes the embedding vectors of distorted views of a sample to be close while minimising the redundancy between the components of these vectors.
 
-![Barlow Twins|600](../images/blogs/intro-to-ssl/Untitled%206.png)
+![Barlow Twins|600](/images/blogs/intro-to-ssl/Untitled%206.png)
       
 ### NNCLR (2021)
       
 While most methods treat different views of the same image as positives for a contrastive loss, Nearest-Neighbour Contrastive Learning (NNCLR) tries to use the positives from other instances in the dataset, i.e., uses different images from the same class, rather than augmenting the same image.
 
-![NNCLR|600](../images/blogs/intro-to-ssl/Untitled%207.png)
+![NNCLR|600](/images/blogs/intro-to-ssl/Untitled%207.png)
 
 ## Evaluation
 

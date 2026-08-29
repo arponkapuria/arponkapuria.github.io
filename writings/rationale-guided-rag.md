@@ -37,7 +37,7 @@ Their proposed solution **RAG²** enhances standard RAG via three key modules:
 
 ## Workflow
 
-![Rationale-Guided-RAG Algorithm|400](../images/blogs/rationale-guided-rag-algorithm.png)
+![Rationale-Guided-RAG Algorithm|400](/images/blogs/rationale-guided-rag-algorithm.png)
 
 ## Evaluation
 

@@ -35,7 +35,7 @@ The proposed system, **RULE**, tackles these two problems through:
 
 ## Workflow
 
-![RULE Algorithm|400](../images/blogs/rule-paper-algorithm.png)
+![RULE Algorithm|400](/images/blogs/rule-paper-algorithm.png)
 
 ## Evaluation
 
@@ -52,7 +52,7 @@ The proposed system, **RULE**, tackles these two problems through:
 5. **Ablation Studies**:
     - Removing certain models result in factual accuracy drop.
         
-![RULE Evaluation](../images/blogs/rule-paper-evaluation.png)
+![RULE Evaluation](/images/blogs/rule-paper-evaluation.png)
         
 <hr>
 

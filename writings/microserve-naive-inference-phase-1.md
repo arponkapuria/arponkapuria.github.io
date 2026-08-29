@@ -214,7 +214,7 @@ _ = naive_generate(model, tokenizer, "Hello", warmup_config)
 
 ### Plotting the Inter-Token Latencies
 
-![Inter-token latency per request, naive no-cache decode|600](../images/blogs/microserve/naive_itl.png)
+![Inter-token latency per request, naive no-cache decode|600](/images/blogs/microserve/naive_itl.png)
 
 Each panel is one request's per-token latency, log-scaled. The two short requests stay close to a flat line; the two longer ones show sharp, isolated spikes rather than a smoothly worsening curve.
 
