@@ -370,11 +370,10 @@ a:hover { color: var(--accent); text-decoration: underline; }
 
 .markdown-body table {
   border-collapse: collapse;
-  width: 100%;
-  margin: 1.2rem 0;
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.2rem auto;
   font-size: .9rem;
-  display: block;
-  overflow-x: auto;
 }
 .markdown-body th, .markdown-body td {
   border: 1px solid var(--border);

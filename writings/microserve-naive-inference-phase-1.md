@@ -54,6 +54,7 @@ for _ in range(config.max_new_tokens):
     next_token = torch.argmax(next_token_logits, dim=-1, keepdim=True)
     generated_ids = torch.cat([generated_ids, next_token], dim=1)
 
+    sync_device(device)   # wait for the GPU/MPS to actually finish before stopping the clock
     step_end = time.perf_counter()
     per_token_latencies_ms.append((step_end - step_start) * 1000)
 
@@ -63,7 +64,9 @@ for _ in range(config.max_new_tokens):
 
 `use_cache=False` is the one line doing all the damage. It forces the model to recompute attention over `generated_ids` — which grows by one token every iteration — from zero, every single time, discarding all the Key/Value pairs it just computed.
 
-Here's why that's expensive in a way that compounds: the cost of one forward pass grows roughly with how many tokens it has to process. If generating token `k` means processing `prompt_len + k` tokens from scratch, then the total work to generate `n` tokens is roughly `1 + 2 + 3 + ... + n`, which grows proportionally to `n²`. A cached loop, by contrast, only ever processes *one new token* per step — its total work grows proportionally to `n`, not `n²`. That gap between "grows like n" and "grows like n²" is the entire reason Phase 2 exists.
+`sync_device(device)` is worth a note too: MPS and CUDA hand work off to the GPU asynchronously, so a timestamp taken the instant `model()` returns measures how long it took to *dispatch* the work, not how long the work actually *took*. Every timing number in this project explicitly waits for the accelerator to finish before stopping the clock.
+
+Here's why the recomputation is expensive in a way that compounds: the cost of one forward pass grows roughly with how many tokens it has to process. If generating token `k` means processing `prompt_len + k` tokens from scratch, then the total work to generate `n` tokens is roughly `1 + 2 + 3 + ... + n`, which grows proportionally to `n²`. A cached loop, by contrast, only ever processes *one new token* per step — its total work grows proportionally to `n`, not `n²`. That gap between "grows like n" and "grows like n²" is the entire reason Phase 2 exists.
 
 To make the Key/Value structure concrete rather than abstract, `naive.py` also has a small tracer that runs one forward pass *with* caching enabled just to print what the model is actually holding onto:
 
@@ -130,31 +133,30 @@ def build_request_metrics(prompt, generated_text, prompt_tokens,
     ...
 ```
 
-The first recorded latency is TTFT; everything after it is inter-token latency, and TPOT is just their average. For memory calculation, `torch.accelerate` is used to track peak allocated memory on both CUDA and Apple Silicon and it shows a signal that current-allocated memory alone never could: peak memory pulls further and further ahead of steady allocation as generations get longer, which lines up exactly with where this baseline is expected to hurt.
+The first recorded latency is TTFT; everything after it is inter-token latency, and TPOT is just their average. Every one of those latencies is measured only after `sync_device()` confirms the accelerator has actually finished the step — without that, these numbers would measure how fast Python can hand work off, not how fast the model actually runs.
+
+For memory, `torch.accelerator.memory` tracks peak allocated memory on both CUDA and Apple Silicon, and it shows a signal that current-allocated memory alone never could: peak memory pulls further and further ahead of steady allocation as generations get longer, which lines up exactly with where this baseline is expected to hurt.
 
 ```python
-# Memory helpers — device-agnostic (using torch.accelerator.memory). This gives real peak-since-reset tracking on MPS
-
 def reset_peak_memory(device: str) -> None:
-    """Reset the peak-memory tracking baseline. No-op for cpu."""
     if device in ("cuda", "mps"):
         torch.accelerator.memory.reset_peak_memory_stats()
 
-
 def current_memory_mb(device: str) -> float:
-    """Current allocated memory in MB. Returns 0.0 on cpu or any device
-    with no accelerator memory API."""
     if device in ("cuda", "mps"):
         return torch.accelerator.memory.memory_allocated() / (1024 ** 2)
     return 0.0
 
-
 def peak_memory_mb(device: str) -> float:
-    """True peak allocated memory in MB since the last reset_peak_memory()
-    call. Accurate on both CUDA and MPS."""
     if device in ("cuda", "mps"):
         return torch.accelerator.memory.max_memory_allocated() / (1024 ** 2)
     return 0.0
+
+def sync_device(device: str) -> None:
+    if device == "mps":
+        torch.mps.synchronize()
+    elif device == "cuda":
+        torch.cuda.synchronize()
 ```
 
 ## Serving One Request at a Time
@@ -205,26 +207,22 @@ _ = naive_generate(model, tokenizer, "Hello", warmup_config)
 
 | Prompt | Gen. tokens | TTFT (ms) | Total latency (ms) | TPOT (ms) | TPS |
 |---|---|---|---|---|---|
-| "The capital of Bangladesh is" | 12 | 22.07 | 611.50 | 53.58 | 19.62 |
-| "What is 2 + 2?" | 2 | 14.60 | 49.01 | 34.41 | 40.81 |
-| "Explain a KV cache" | 101 | 43.52 | 10,367.77 | 103.24 | 9.74 |
-| "Ocean poem, four lines" | 37 | 105.06 | 1,744.20 | 45.53 | 21.21 |
+| "The capital of Bangladesh is" | 12 | 159.44 | 1,951.96 | 162.96 | 6.15 |
+| "What is 2 + 2?" | 2 | 156.50 | 321.98 | 165.49 | 6.21 |
+| "Explain a KV cache" | 101 | 147.88 | 71,513.91 | 713.66 | 1.41 |
+| "Ocean poem, four lines" | 37 | 355.19 | 21,189.22 | 578.72 | 1.75 |
 
-**Aggregate (4 sequential requests)**: mean latency 3,193.12ms, median 1,177.85ms, mean TTFT 46.31ms, mean TPS 22.85, RPS 0.06. p99 is still just the max at n=4 — not a real tail estimate.
+**Aggregate (4 sequential requests)**: mean latency 23,744.27ms, median 11,570.59ms, mean TTFT 204.75ms, mean TPS 3.88, RPS 0.042, system TPS 1.58. p99 is still just the max at n=4 — not a real tail estimate.
 
 ### Plotting the Inter-Token Latencies
 
 ![Inter-token latency per request, naive no-cache decode|600](/images/blogs/microserve/naive_itl.png)
 
-Each panel is one request's per-token latency, log-scaled. The two short requests stay close to a flat line; the two longer ones show sharp, isolated spikes rather than a smoothly worsening curve.
+Each panel is one request's per-token latency, log-scaled. The two short requests stay in a fairly narrow band; the two longer ones show recomputation cost compounding into severe, escalating stalls rather than a smooth curve.
 
-### Warmup helps, but the request right after the heaviest one still pays a tax
+### The long request breaks catastrophically, not gradually
 
-TTFT is low for the first three requests (22.07ms, 14.60ms, 43.52ms), then jumps to 105.06ms on request 4 — despite request 4 having the exact same prompt length (23 tokens) as request 3. Request 4 comes immediately after the heaviest generation in the batch (101 tokens, over 10 seconds), which is consistent with residual system load bleeding into the next request's first forward pass, not a cold start (warmup already handled that) or prompt length (ruled out by the exact length match).
-
-### The long request breaks in two sharp bursts, not a gradual decline
-
-The 101-token generation stays steady for its first ~36 tokens (12–91ms). Then four consecutive tokens spike hard — 1,488ms, **2,794ms** (the worst stall of the run), 717ms, 240ms — before dropping straight back to the same 20–100ms band for another 40 tokens. A second, smaller isolated spike hits at token 80 (1,382ms), then it's steady to the end. Not a worsening tail — two sharp, separated bursts.
+The 101-token generation stays in a rough 143–330ms band for its first ~35 tokens. Then a severe cluster hits: 3,166ms, 6,984ms, **16,738ms** (the single worst stall of the run — longer than it took the entire poem request to finish), and 6,393ms, four consecutive tokens accounting for over 33 seconds on their own. After that, latency settles into an elevated band for the rest of the generation, with two further isolated spikes along the way. The ocean poem stays fairly tame for 36 of its 37 tokens — then the very last token alone takes **13,400ms**, longer than the rest of that entire request combined.
 
 ### Memory tracking shows something real — and it's exactly what the theory predicted
 
@@ -237,20 +235,19 @@ The 101-token generation stays steady for its first ~36 tokens (12–91ms). Then
 | "Ocean poem" | 37 | 17.04 MB |
 | "Explain a KV cache" | 101 | 35.83 MB |
 
-The longest generation shows roughly 4.5x the peak-memory overshoot of the shortest. That's hard evidence — not just an inference from the stall pattern — that the naive loop's *transient* memory footprint grows with how long a generation runs, exactly as the "no reuse, so both compute and memory grow every step" theory predicted from the start.
+The longest generation shows roughly 4.5x the peak-memory overshoot of the shortest. Read alongside the stall pattern above, this points at a real, plausible mechanism: on 8GB of unified memory shared with the OS, a growing sequence with no cache reuse means every step's transient footprint grows too — and macOS's own memory management under that pressure is a very plausible source of the multi-second stalls, not something intrinsic to the model's raw compute cost.
 
-### Wall clock is still well beyond the summed request latencies
+### Wall clock closely tracks the summed request latencies
 
-67.05s wall clock vs. 12.77s summed request latencies — a 54.28s gap across 3 inter-request intervals (~18.09s each). A large, real gap sitting outside the timed window. Flagged as an open question — worth instrumenting what happens between requests specifically, rather than guessing further.
+96.10s wall clock vs. 94.98s summed request latencies — a gap of about 1.1 seconds across three inter-request intervals, well within ordinary Python-level overhead (tokenization, printing, list bookkeeping). No large unexplained gap here.
 
 ## What's Next
 
-The naive loop's flaw — recomputing everything, every step, with zero Key/Value reuse — creates real instability on memory-constrained hardware, visible on two independent fronts: the ITL stalls, and real peak-memory tracking that grows in lockstep with generation length.
+The naive loop's flaw — recomputing everything, every step, with zero Key/Value reuse — creates real, severe instability on memory-constrained hardware, visible on two independent fronts: multi-second-to-multi-ten-second ITL stalls, and peak-memory tracking that grows in lockstep with generation length.
 
 Phase 2 builds a hand-rolled KV cache and re-runs these same four prompts. The prediction, based on everything above: per-step compute and memory should stop growing with sequence length, which should flatten both the ITL stalls and the peak-memory overshoot down to something small and roughly constant regardless of how long the generation runs.
 
 ---
-
 > Code: [https://github.com/arponkapuria/MicroServe](https://github.com/arponkapuria/MicroServe)
 >
 > Full metrics and analysis: `reports/01_naive_inference_report.md`

@@ -7,16 +7,16 @@ modified: August 29, 2026
 
 author: Arpon Kapuria
 category: Dev Journal
-tags: LLM Inference, Production AI
+tags: LLM Inference, Production AI, KV Cache, Inference Optmization
 ---
 
 ## Motivation
 
-Phase 1 built the naive decode loop on purpose: recompute the entire sequence from scratch on every single step, throw the Key/Value tensors away immediately after using them once. It was slow by design, so the cost of *not* caching would show up as real numbers instead of received wisdom. It showed up — a multi-second response for a 101-token answer, with sharp latency spikes appearing mid-generation, and a transient memory footprint that grew right alongside those spikes.
+Phase 1 built the naive decode loop on purpose: recompute the entire sequence from scratch on every single step, throw the Key/Value tensors away immediately after using them once. It was slow by design, so the cost of *not* caching would show up as real numbers instead of received wisdom. It showed up badly — a 101-token response took over 71 seconds, with a single stall (16.7 seconds, on one token) longer than this entire request's response should have taken, and a transient memory footprint that grew right alongside those stalls.
 
 This phase does the obvious next thing: stop throwing away Key/Value tensors that haven't changed, and reuse them instead. No custom memory layout, no block allocation — that's Phase 5's job. This phase is isolated to one question, and only one: what happens when recomputation goes away?
 
-> **This post is Phase 02:** the KV cache. Same four prompts as Phase 1, same everything else — only the engine changes (adds KV Cache). The receipts showing exactly what that one change buys.
+> **This post is Phase 2:** the KV cache. Same four prompts as Phase 1, same everything else — only the engine changes (adds KV Cache). The receipts showing exactly what that one change buys.
 >
 > **Phase 01:** [Building an LLM Inference Engine (MicroServe) — The Naive Inference Path](/blogs/posts/microserve-naive-inference-phase-1/)
 
@@ -42,7 +42,7 @@ Unlike the naive loop — where every step is shaped like a full prefill — the
 
 ```python
 outputs = model(input_ids=input_ids, use_cache=True)
-past_key_values = outputs.past_key_values   # prefill: full prompt in, full cache out
+past_key_values = outputs.past_key_values       # prefill: full prompt in, full cache out
 
 for _ in range(config.max_new_tokens):
     next_token = pick_next_token(outputs.logits[:, -1, :], config)
@@ -51,18 +51,18 @@ for _ in range(config.max_new_tokens):
         past_key_values=past_key_values,
         use_cache=True,
     )
-    past_key_values = outputs.past_key_values       # cache grows by one token's K/V
+    past_key_values = outputs.past_key_values   # cache grows by one token's K/V
 ```
 
 This mirrors how real serving engines think about the two phases: prefill is compute-bound (*it touches every prompt token once, in parallel*), decode is bandwidth-bound (*it touches exactly one new token per step, but has to read the whole growing cache to do it*). Making that split explicit in the code — not just implicit in performance — is the point of this phase.
 
 ## Why This Turns O(n²) Into O(n)
 
-The naive loop's cost for generating `n` tokens grows like `1 + 2 + 3 + ... + n ≈ n²`, because every step recomputes the full growing prefix. The cached loop's decode steps each do a fixed amount of new work — one token's worth — regardless of how long the sequence has gotten. Total decode cost grows like `n`, not `n²`. The gap between those two curves is what showed up as Phase 1's latency spikes on the long generation, and, as shown below, as real, measurable transient memory pressure too.
+The naive loop's cost for generating `n` tokens grows like `1 + 2 + 3 + ... + n ≈ n²`, because every step recomputes the full growing prefix. The cached loop's decode steps each do a fixed amount of new work — one token's worth — regardless of how long the sequence has gotten. Total decode cost grows like `n`, not `n²`. The gap between those two curves is what showed up as Phase 1's catastrophic latency spikes on the long generations, and, as shown below, as real, measurable transient memory pressure too.
 
 ## Running the Same Four Prompts Again
 
-Same benchmark script structure as Phase 1  — same 4 prompts, same warmup, same `max_new_tokens=128`, only the generate function differs:
+Same benchmark script structure as Phase 1 — same 4 prompts, same warmup, same `max_new_tokens=128`, only the generate function differs:
 
 ```python
 warmup_config = replace(CONFIG, max_new_tokens=8)
@@ -75,12 +75,12 @@ _ = cached_generate(model, tokenizer, "Hello", warmup_config)
 
 | Prompt | Gen. tokens | TTFT (ms) | Total latency (ms) | TPOT (ms) | TPS |
 |---|---|---|---|---|---|
-| "The capital of Bangladesh is" | 12 | 33.33 | 189.36 | 14.18 | 63.37 |
-| "What is 2 + 2?" | 2 | 34.41 | 50.27 | 15.86 | 39.78 |
-| "Explain a KV cache" | 101 | 32.78 | 1,827.27 | 17.94 | 55.27 |
-| "Ocean poem, four lines" | 37 | 14.41 | 649.19 | 17.63 | 56.99 |
+| "The capital of Bangladesh is" | 12 | 178.37 | 1,236.45 | 96.19 | 9.71 |
+| "What is 2 + 2?" | 2 | 179.65 | 281.28 | 101.62 | 7.11 |
+| "Explain a KV cache" | 101 | 159.84 | 9,920.06 | 97.60 | 10.18 |
+| "Ocean poem, four lines" | 37 | 162.55 | 3,579.00 | 94.90 | 10.34 |
 
-**Aggregate**: mean latency 679.02ms (Phase 1: 3,193.12ms), mean TTFT 28.73ms (Phase 1: 46.31ms), mean TPS 53.86 (Phase 1: 22.85), wall clock 14.32s for all 4 requests (Phase 1: 67.05s).
+**Aggregate**: mean latency 3,754.20ms (Phase 1: 23,744.27ms), mean TTFT 170.10ms (Phase 1: 204.75ms), mean TPS 9.33 (Phase 1: 3.88), wall clock 15.17s for all 4 requests (Phase 1: 96.10s).
 
 ### Phase 1 vs Phase 2, side by side
 
@@ -88,21 +88,19 @@ _ = cached_generate(model, tokenizer, "Hello", warmup_config)
 
 ### The 101-token request is the headline number
 
-Phase 1's worst case — the "explain a KV cache" prompt, 101 generated tokens — took 10.37 seconds, with two sharp multi-second bursts appearing mid-generation. With the cache: **1.83 seconds**, an 82.4% reduction, with TPOT dropping from 103.24ms to 17.94ms — a number now in line with the other three requests instead of a multi-x outlier.
+Phase 1's worst case — the "explain a KV cache" prompt, 101 generated tokens — took 71.5 seconds, with a severe multi-second-to-multi-ten-second cluster mid-generation (one single token stalling for 16.7 seconds). With the cache: **9.9 seconds**, an 86.1% reduction, with TPOT dropping from 713.66ms to 97.60ms — more than a 7x improvement, and now in line with the other three requests instead of a wild outlier.
 
 ### The stalls are gone, not just smaller
 
 ![Inter-token latency per request, KV cache decode|600](/images/blogs/microserve/kv_cache_itl.png)
 
-Phase 1's naive P3 destabilized in two isolated bursts — 1,488ms and 2,794ms back-to-back around token 37, then a smaller 1,382ms spike near token 80 — against an otherwise steady 12–91ms band. The cached version shows neither: a bounded band, roughly 9–36ms across all 100 inter-token gaps, no spikes anywhere. Good evidence the diagnosis was right, not just plausible — removing only the recomputation removed the entire failure mode.
+Phase 1's naive P3 destabilized into a severe cluster — four consecutive tokens running 3,166ms → 6,984ms → 16,738ms → 6,393ms — against an otherwise merely-elevated band. The cached version shows nothing like it: a tight, bounded band across all 100 inter-token gaps, no spikes anywhere. Phase 1's poem request also had one catastrophic 13,400ms stall on its very last token; the cached version's last token is unremarkable, indistinguishable from the rest of its run. Good evidence the diagnosis was right, not just plausible — removing only the recomputation removed the entire failure mode.
 
 ### The cache isn't free — but the tradeoff splits cleanly by generation length
 
-Time to first token got worse under caching for the two shortest requests (22.07→33.33ms, 14.60→34.41ms) — real, structural cache-init overhead. But it got *better* for the two longer ones (43.52→32.78ms, and 105.06→14.41ms). That second case is worth unpacking: P4 (the ocean poem) immediately follows P3, the heaviest request, and Phase 1's report attributes P4's elevated naive TTFT to residual system load bleeding in from the request before it. Under caching, P3 itself finishes in 1.83s instead of 10.37s — so P4 inherits far less residual load, and ends up with the *lowest* TTFT of all four requests. Two effects are at work here: cache-init cost raises TTFT on its own, while finishing the preceding request faster lowers it for whatever comes next.
+Time to first token got worse under caching for three of the four requests (159.44→178.37ms, 156.50→179.65ms, 147.88→159.84ms) — real, structural cache-init overhead. The exception is worth unpacking: the poem prompt immediately follows the KV-cache-explanation prompt (the heaviest request), and Phase 1's report attributes the poem's elevated naive TTFT (355.19ms) to residual system load bleeding in from the request before it. Under caching, that heavy request finishes in 9.9s instead of 71.5s — so the poem inherits far less residual load, and its cached TTFT (162.55ms) actually comes in *lower* than its naive TTFT, despite paying the same cache-init tax as the other three. Two effects are at work here: cache-init cost raises TTFT on its own, while finishing the preceding request faster lowers it for whatever comes next — and here, the second effect is large enough to outweigh the first.
 
 ### Peak memory shows what the cache is actually saving
-
-With MPS peak-memory tracking now real (not a flat proxy), the difference between engines is stark:
 
 | Prompt | Naive peak − allocated | KV cache peak − allocated |
 |---|---|---|
@@ -111,11 +109,11 @@ With MPS peak-memory tracking now real (not a flat proxy), the difference betwee
 | **P4:** "Ocean poem" (37 tok) | 17.04 MB | 1.57 MB |
 | **P3:** "Explain a KV cache" (101 tok) | 35.83 MB | **0.36 MB** |
 
-On the long request — the one that struggled most under the naive engine — the cache doesn't just fix latency, it nearly eliminates the transient memory overshoot: from 35.83 MB down to 0.36 MB. That's independent confirmation, from a completely different signal than latency, that the naive loop's problem really was recomputation-driven memory pressure.
+On the long request — the one that struggled most under the naive engine, both in latency and in this memory table — the cache doesn't just fix latency, it nearly eliminates the transient memory overshoot: from 35.83 MB down to 0.36 MB. That's independent confirmation, from a completely different signal than latency, that the naive loop's problem really was recomputation-driven memory pressure.
 
-### Where caching doesn't pay off
+### Every request improves, including the shortest one
 
-The shortest generation (2 tokens) is the one prompt where caching doesn't help — 49.01ms → 50.27ms, a small 2.6% increase. The cache buys back decode cost, and a 2-token generation has almost no decode cost to buy back, but still pays the full cache-initialization cost during prefill. A real, worth-knowing tradeoff: the payoff is proportional to generation length.
+The shortest generation (2 tokens) still shows a real, if modest, improvement — 321.98ms → 281.28ms, a 12.6% reduction. The cache buys back decode cost, and a 2-token generation has almost no decode cost to buy back — but the real per-token cost this hardware pays (once measured correctly, with the accelerator synced before each timer stops) turns out to be large enough that even one cached decode step's savings outweighs the fixed cache-init cost paid during prefill.
 
 ## What's Next
 
