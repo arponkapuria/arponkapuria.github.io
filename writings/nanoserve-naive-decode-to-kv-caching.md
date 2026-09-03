@@ -1,5 +1,5 @@
 ---
-title: From Naive Decode to KV Cache: How LLM Serving Got 4x Faster With One Idea
+title: From Naive Decode to KV Cache: Why LLM Serving Gets Faster With One Idea
 description: Part of NanoServe, a from-scratch tiny LLM inference engine. This article covers the naive decode loop to hand-threaded KV cache — why reusing Key/Value tensors instead of recomputing them turns a quadratic decode loop into a linear one, and what that's worth in practice
 
 date: September 03, 2026
@@ -51,9 +51,7 @@ for _ in range(max_new_tokens):
 
 Look closely at that loop. On step 1, the model processes, say, 40 tokens — this step is effectively a prefill. On step 2, it processes 41 tokens — the same 40, plus the new one, *all over again*. On step 3, 42 tokens. By the time you're generating your 128th token, the model is re-processing a sequence of over 150 tokens, purely to produce one more.
 
-![Without KV Cache - Prefill vs Decode|600](/images/blogs/nanoserve/wo-kv-cache-prefill-vs-decode.jpg)
-
-*Source: [Medium](https://medium.com/@aminfadaeinejad.edu/17-unlocking-fast-llm-inference-a-deep-dive-into-kv-caching-648ea1674099)*
+![Without KV Cache - Prefill vs Decode|400](/images/blogs/nanoserve/naive-decode.png)
 
 This is the real problem with naive decode, stated precisely: it never actually settles into a proper decode phase. Every "decode" step secretly redoes a full prefill-sized pass over the *entire* sequence so far, instead of the cheap, incremental, single-token step decode is supposed to be. It doesn't remember anything. Every step starts from zero and recomputes the entire sequence's attention, layer by layer, from the very first token.
 
@@ -80,9 +78,7 @@ Here's the insight that unlocks everything: when a transformer processes token b
 
 We weren't wasting compute for a subtle reason — we were doing it because the naive loop above just... didn't save anything. It threw away every intermediate result after each forward pass and started fresh. The fix is almost embarrassingly simple in concept: **save the Keys and Values as you go, and only compute new ones for the newest token.**
 
-![KV Cache - Prefill vs Decode|600](/images/blogs/nanoserve/kv-cache-prefill-vs-decode.jpg)
-
-*Source: [Medium](https://medium.com/@aminfadaeinejad.edu/17-unlocking-fast-llm-inference-a-deep-dive-into-kv-caching-648ea1674099)*
+![KV Cache - Prefill and Decode|400](/images/blogs/nanoserve/kv-cache-prefill-and-decode.png)
 
 Instead of feeding the model the *entire* growing sequence every step, you do the expensive full pass exactly once (the prompt), then feed it just the *one new token* per step, along with the cache of everything computed so far. The model uses the cache to "remember" the rest without redoing the work.
 
@@ -99,7 +95,7 @@ for _ in range(max_new_tokens - 1):
 
 Notice the size of what's being fed to the model in the loop now: `next_token` is a single token, not the whole sequence. That's the whole trick. This code is also, for the first time, actually honest about the prefill/decode split from earlier: the first call (`self.model(input_ids, ...)`) *is* the prefill — one shot, full prompt. The loop after it *is* decode — genuinely one token at a time, genuinely incremental, no longer secretly redoing prefill work on every step. Every step is now roughly constant-cost instead of growing linearly, which takes the total cost from O(N²) down to O(N).
 
-## Naive vs KV Cache: The Numbers
+## Naive vs KV Cache
 
 Here's the same benchmark, same prompt, same hardware. All four core metrics, Naive decode vs. KV cache, side by side:
 
