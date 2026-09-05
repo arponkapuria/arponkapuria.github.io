@@ -1,6 +1,6 @@
 ---
 title: From Naive Decode to KV Cache: Why LLM Serving Gets Faster With One Idea
-description: Part of NanoServe, a from-scratch tiny LLM inference engine. This article covers the naive decode loop to hand-threaded KV cache — why reusing Key/Value tensors instead of recomputing them turns a quadratic decode loop into a linear one, and what that's worth in practice
+description: Part 1 of NanoServe, a tiny LLM inference engine build series. This article covers the naive decode loop to hand-threaded KV cache — why reusing Key/Value tensors instead of recomputing them turns a quadratic decode loop into a linear one, and what that's worth in practice.
 
 date: September 03, 2026
 modified: September 03, 2026
