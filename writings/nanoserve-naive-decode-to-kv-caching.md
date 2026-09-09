@@ -131,3 +131,5 @@ Right now this KV cache is a single unbroken tensor that just grows — fine for
 ---
 
 > Code: [https://github.com/arponkapuria/NanoServe](https://github.com/arponkapuria/NanoServe)
+>
+> **Part 2:** [Paged KV Cache on Apple Silicon: Fixing Memory Fragmentation Without CUDA](/blogs/posts/nanoserve-paged-kv-cache)

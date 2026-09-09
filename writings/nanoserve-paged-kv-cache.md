@@ -12,7 +12,7 @@ tags: LLM Inference, AI Systems
 
 > Part 2 of the NanoServe build series. Part 1 covered naive decode and KV cache; this part assumes you've read that, or at least know what a KV cache is and why it speeds up decoding.
 >
-> **Part 1:** [From Naive Decode to KV Cache: Why LLM Serving Gets Faster With One Idea](/blogs/posts/nanoserve-paged-kv-cache)
+> **Part 1:** [From Naive Decode to KV Cache: Why LLM Serving Gets Faster With One Idea](/blogs/posts/nanoserve-naive-decode-to-kv-caching)
  
 Part 1 fixed a *compute* problem: stop recomputing Keys and Values you already know. This part fixes a different problem that KV cache never touches — *how that cache is stored in memory*. Because this project runs on an Apple Silicon GPU instead of an NVIDIA one, the version we can actually build looks different from the industry-standard one. This article covers what the standard version does, why we can't copy it directly, what we built instead, and how we tested it.
 
@@ -230,3 +230,5 @@ The real performance story — throughput under concurrent load, actual utilizat
 ---
  
 > Code: [https://github.com/arponkapuria/NanoServe](https://github.com/arponkapuria/NanoServe)
+> 
+> **Part 3:** [Continuous Batching: Getting More LLM Throughput From the Same GPU](/blogs/posts/nanoserve-continuous-batching)
