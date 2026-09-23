@@ -1,6 +1,6 @@
 ---
-title: Paged KV Cache on Apple Silicon: Fixing Memory Fragmentation Without CUDA
-description: Part 2 of NanoServe, a tiny LLM inference engine build series. This article covers how paged KV cache eliminates GPU memory fragmentation, the CUDA-based design behind it, and the block-based cache built for Apple Silicon instead.
+title: "KV Cache on Apple Silicon: Why Memory Fragments and How PagedAttention Helps"
+description: Part 2 of NanoServe, a tiny LLM inference engine build series. This article covers how KV cache implemented with PagedAttention reduces GPU memory fragmentation, the CUDA-based design behind it, and the block-based cache built for Apple Silicon instead.
 
 date: September 05, 2026
 modified: September 05, 2026

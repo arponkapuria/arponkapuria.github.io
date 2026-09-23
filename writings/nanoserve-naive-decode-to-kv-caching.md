@@ -1,5 +1,5 @@
 ---
-title: From Naive Decode to KV Cache: Why LLM Serving Gets Faster With One Idea
+title: "From Naive Decode to KV Cache: Why LLM Serving Gets Faster With One Idea"
 description: Part 1 of NanoServe, a tiny LLM inference engine build series. This article covers the naive decode loop to hand-threaded KV cache — why reusing Key/Value tensors instead of recomputing them turns a quadratic decode loop into a linear one, and what that's worth in practice.
 
 date: September 03, 2026
@@ -132,4 +132,4 @@ Right now this KV cache is a single unbroken tensor that just grows — fine for
 
 > Code: [https://github.com/arponkapuria/NanoServe](https://github.com/arponkapuria/NanoServe)
 >
-> **Part 2:** [Paged KV Cache on Apple Silicon: Fixing Memory Fragmentation Without CUDA](/blogs/posts/nanoserve-paged-kv-cache)
+> **Part 2:** [KV Cache on Apple Silicon: Why Memory Fragments and How PagedAttention Helps](/blogs/posts/nanoserve-paged-kv-cache)

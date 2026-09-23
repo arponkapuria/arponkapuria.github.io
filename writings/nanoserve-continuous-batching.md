@@ -1,5 +1,5 @@
 ---
-title: Continuous Batching: Getting More LLM Throughput From the Same GPU
+title: "Continuous Batching: Getting More LLM Throughput From the Same GPU"
 description: Part 3 of NanoServe, a tiny LLM inference engine build series. This article covers continuous batching — why serving requests one at a time wastes the GPU, how an iteration-level scheduler fixes it, and what the numbers actually showed on Apple Silicon.
 
 date: September 09, 2026
@@ -12,7 +12,7 @@ tags: LLM Inference, AI Systems
 
 > Part 3 of the NanoServe build series. Part 1 covered naive decode and KV cache. Part 2 covered paged KV cache — block-based memory that avoids waste, built specifically so this part could use it. This part assumes you've read both, or at least know what a KV cache and a block pool are.
 >
-> **Part 2:** [Paged KV Cache on Apple Silicon: Fixing Memory Fragmentation Without CUDA](/blogs/posts/nanoserve-paged-kv-cache)
+> **Part 2:** [KV Cache on Apple Silicon: Why Memory Fragments and How PagedAttention Helps](/blogs/posts/nanoserve-paged-kv-cache)
 
 Part 2 ended with a promise it deliberately didn't cash in: paged KV cache doesn't make one request faster, it just avoids wasting memory — and that waste only turns into a real payoff once *multiple* requests actually share the pool at the same time. This part is where that payoff gets collected.
 
@@ -260,3 +260,5 @@ That's a **scheduler** — a real admission policy sitting on top of this exact 
 ---
 
 > Code: [https://github.com/arponkapuria/NanoServe](https://github.com/arponkapuria/NanoServe)
+>
+> **Part 4:** [The Scheduler: Backpressure, Timeouts, and Knowing When to Say No](https://github.com/arponkapuria/arponkapuria.github.io/blob/main/blogs/posts/nanoserve-scheduler)

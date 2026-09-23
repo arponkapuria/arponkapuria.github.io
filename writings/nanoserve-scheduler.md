@@ -1,5 +1,5 @@
 ---
-title: The Scheduler: Backpressure, Timeouts, and Knowing When to Say No
+title: "The Scheduler: Backpressure, Timeouts, and Knowing When to Say No"
 description: Part 4 of NanoServe, a tiny LLM inference engine build series. This article covers how a real scheduler replaces continuous batching's naive admission policy with a bounded queue, backpressure, and timeouts.
 
 date: September 13, 2026
@@ -146,3 +146,5 @@ That's what prefix caching solves, and NanoServe's version of it is a **radix ca
 ---
 
 > Code: [https://github.com/arponkapuria/NanoServe](https://github.com/arponkapuria/NanoServe)
+> 
+> **Part 5:** [Prefix Caching: Reusing the Work You’ve Already Paid For With RadixAttention](/blogs/posts/nanoserve-prefix-caching)

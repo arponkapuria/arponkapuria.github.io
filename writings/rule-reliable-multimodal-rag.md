@@ -1,5 +1,5 @@
 ---
-title: RULE: Reliable Multimodal RAG for Factuality in Medical Vision Language Models
+title: "RULE: Reliable Multimodal RAG for Factuality in Medical Vision Language Models"
 description: A concise summary and analysis of RULE - A multimodal retrieval-augmented generation framework designed to improve factuality in medical vision-language models.
 
 date: June 28, 2025

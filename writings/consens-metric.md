@@ -1,5 +1,5 @@
 ---
-title: ConSens: Assessing Context Grounding in Open‑Book Question Answering
+title: "ConSens: Assessing Context Grounding in Open‑Book Question Answering"
 description: A concise summary and analysis of ConSens, a score used in assessing context grounding in open‑book question answering
 
 date: June 19, 2025
