@@ -12,7 +12,7 @@ tags: LLM Inference, AI Systems
 
 > Part 5 of the NanoServe build series. Part 4 covered the scheduler — backpressure and timeouts on top of continuous batching's admission loop; this part assumes you've read that, or at least know what it means for a request to sit in a queue waiting for a batch slot.
 >
-> **Part 4:** [The Scheduler: Backpressure, Timeouts, and Knowing When to Say No](https://github.com/arponkapuria/arponkapuria.github.io/blob/main/blogs/posts/nanoserve-scheduler)
+> **Part 4:** [The Scheduler: Backpressure, Timeouts, and Knowing When to Say No](/blogs/posts/nanoserve-scheduler)
 
 Every request handled so far in this series is treated like a total stranger to every other one. Same system prompt, same instructions, same few-shot examples pasted in front of a different question — doesn't matter. The engine recomputes all of it, every single time, from token zero. That's not a bug in anything built so far; nothing built so far had any way to notice two requests share anything. This part gives it that ability.
 
@@ -222,3 +222,5 @@ That's **chunked prefill**: splitting a long prompt's prefill into pieces small 
 ---
 
 > Code: <https://github.com/arponkapuria/NanoServe>
+>
+> **Part 6:** [Chunked Prefill: Stopping One Long Prompt From Freezing Everyone Else](/blogs/posts/nanoserve-chunked-prefill)
