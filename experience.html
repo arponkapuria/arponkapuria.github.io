@@ -123,7 +123,7 @@
                     <img src="/images/work/iitb.svg" alt="IIT Bombay" class="project-image">
                     <div class="work-content">
                         <p class="title"><strong>Indian Institute of Technology Bombay</strong></p>
-                        <p>Research Intern</p>
+                        <p>Summer Research Intern</p>
                         <p>May 2023 – July 2023 | MeDAL Lab | India</p>
                         <p>Worked on enhancing a Self-Supervised Learning Framework <a href="https://proceedings.neurips.cc/paper/2020/hash/f3ada80d5c4ee70142b17b8192b2958e-Abstract.html" target="_blank">(BYOL)</a> for better representation learning. Created an user friendly system for DICOM image anonymization.</p>
                         <p>Advised by <a href="https://www.ee.iitb.ac.in/~asethi/" target="_blank">Prof. Amit Sethi</a> & <a href="https://www.linkedin.com/in/gouranga-bala-5871b8191/?originalSubdomain=in" target="_blank">Gouranga Bala (PhD)</a></p>
@@ -153,32 +153,56 @@
                         <p class="project-title"><strong>AI-Space: An Interactive AI Knowledge Graph</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                <span style="color: tomato;">July 2026 – Present</span> | 
+                                <span style="color: tomato;">Ongoing Project</span> | 
                                 <a href="https://ai-space-vert.vercel.app/" target="_blank">
                                     Preview
                                 </a>
                             </div>
 
                             <div class="project-filters">
+                                <span class="project-filter">Interactive Learning</span>
                                 <span class="project-filter">Knowledge Graph</span>
-                                <span class="project-filter">Visualization</span>
                             </div>
                         </div>
 
-                        <p>AI-Space is a visual learning platform where every AI concept is connected through an interactive Knowledge Graph. Explore how ideas relate, search across topics, and dive into detailed explanations—all from a single, intuitive interface.</p>
+                        <p>AI-Space is a interactive learning platform where every AI concept is connected through an interactive Knowledge Graph. Explore how AI/ML concepts relate, search across topics, and dive into detailed explanations—all from a single, intuitive interface.</p>
 
                         <p><strong>Tech Used:</strong> React, TypeScript, PixiJS, D3.js, Vite, Zustand, Tailwind CSS, Fuse.js</p>
                     </div>
                 </div>
 
-                <!-- SCALABLE AGENTIC RAG PIPELINE -->
+                <!-- NanoServe -->
                 <div class="project-container">
-                    <img src="images/projects/scalable-agentic-rag.png" alt="image-coming-soon" class="project-image modal-image">
+                    <img src="images/projects/nanoserve.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
-                        <p class="project-title"><strong>Agentic RAG System with Hybrid Retrieval and Scalable Deployment</strong></p>
+                        <p class="project-title"><strong>NanoServe: Tiny LLM Inference Engine</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                March 2026 – April 2026 |
+                                <span style="color: tomato;">Ongoing Project</span> |
+                                <a href="https://github.com/arponkapuria/NanoServe" target="_blank">
+                                    GitHub
+                                </a>
+                            </div>
+
+                            <div class="project-filters">
+                                <span class="project-filter">AI Systems</span>
+                                <span class="project-filter">Inference Optimization</span>
+                            </div>
+                        </div>
+
+                        <p>A lightweight LLM inference engine, coded from scratch to explore inference optimization techniques in modern LLM serving. It includes a benchmarking framework to implement, evaluate, and compare these techniques across latency, throughput, memory usage, and resource utilization on Apple Silicon (MPS).</p>
+                        <p><strong>Tech Used:</strong> Python, PyTorch, Transformers (HuggingFace)</p>
+                    </div>
+                </div>
+
+                <!-- SCALABLE AGENTIC RAG PIPELINE -->
+                <div class="project-container">
+                    <img src="" alt="image-coming-soon" class="project-image modal-image">
+                    <div class="project-content">
+                        <p class="project-title"><strong>Multi-Tenant Agentic RAG Platform for Document Q&A</strong></p>
+                        <div class="project-meta">
+                            <div class="project-info">
+                                <span style="color: tomato;">Under Modification</span> |
                                 <a href="https://github.com/arponkapuria/scalable-agentic-rag-pipeline" target="_blank">
                                     GitHub
                                 </a>
@@ -187,16 +211,16 @@
                             <div class="project-filters">
                                 <span class="project-filter">Agentic RAG</span>
                                 <span class="project-filter">LLM Systems</span>
-                                <span class="project-filter">MLOps</span>
+                                <span class="project-filter">LLMOps</span>
                             </div>
                         </div>
-                        <p>Designed and implemented a scalable Agentic RAG pipeline featuring adaptive query planning, hybrid vector-graph retrieval, cross-encoder reranking, and optimized LLM inference with vLLM. The system is deployed on AWS using Kubernetes and Infrastructure as Code, with comprehensive monitoring, tracing, and automated evaluation to ensure reliable, production-ready performance.</p>
-                        <p><strong>Tech Used:</strong> Python, FastAPI, Ray, LangGraph, vLLM, Qdrant, Neo4j, PostgreSQL, Redis, Docker, Kubernetes, Terraform, AWS, Prometheus, Grafana, OpenTelemetry</p>
+                        <p>Developed a multi-tenant agentic RAG platform for citation-backed document Q&A, with LangGraph-based query planning, tool selection, hybrid retrieval, and cross-provider LLM routing for availability and cost. Added semantic caching, retries, circuit breakers, corpus-level isolation, and input/output guardrails for production-grade reliability. Integrated Langfuse for tracing and a custom evaluation harness to measure retrieval and generation quality, faithfulness, correctness, and abstention.</p>
+                        <p><strong>Tech Used:</strong> Python, FastAPI, LangGraph, Docling, Qdrant, FastEmbed, Redis Stack, PostgreSQL, MinIO, Groq, Mistral Vision, Langfuse, RAGAS, Docker</p>
                     </div>
                 </div>
 
                 <!-- U2KG: Unstructured Data to Knowledge Graph Generation -->
-                <div class="project-container">
+                <!-- <div class="project-container">
                     <img src="images/projects/u2kg.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
                         <p class="title"><strong>U2KG: Unstructured Data to Knowledge Graph Generation</strong></p>
@@ -217,29 +241,101 @@
                         <p>Production-ready pipeline for transforming unstructured data into Knowledge Graphs using semantic chunking, LLM-powered entity/relation extraction, observability, evaluation and semantic search.</p>
                         <p><strong>Tech Used:</strong> Python, FastAPI, Neo4j, Redis, OpenRouter, LangFuse, Prometheus, Grafana, Docker, Streamlit</p>
                     </div>
-                </div>
+                </div> -->
 
-                <!-- COLD EMAIL GENERATOR -->
+                <!-- AI Agent Protocols -->
                 <div class="project-container">
-                    <img src="images/projects/cold-mail-generator.png" alt="image-coming-soon" class="project-image modal-image">
+                    <img src="images/projects/agent-protocols.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
-                        <p class="title"><strong>Retrieval Augmented Generation (RAG) Powered Cold Email Generator</strong></p>
+                        <p class="project-title"><strong>AI Agent Protocols: Procurement Agent</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                April 2025 |
-                                <a href="https://github.com/arponkapuria/cold-mail-generator" target="_blank">
+                                <span style="color: tomato;">Ongoing Project</span> |
+                                <a href="https://github.com/arponkapuria/ai-agent-protocols-project" target="_blank">
                                     GitHub
                                 </a>
                             </div>
 
                             <div class="project-filters">
-                                <span class="project-filter">RAG</span>
-                                <span class="project-filter">LLMs</span>
+                                <span class="project-filter">Agentic AI</span>
+                                <span class="project-filter">Agent Protocols</span>
                                 <span class="project-filter">Automation</span>
                             </div>
                         </div>
-                        <p>Developed a Python and Langchain-based RAG system that generates personalized emails matching graduate applicants with professors based on research alignment. This pipeline leverages Llama-4-Maverick chat model (Groq AI), Jina AI Embeddings model and Cohere's Reranker to generate highly contextual cold emails for improved response rates.</p>
-                        <p><strong>Tech Used:</strong> Python, LangChain, FAISS (Vector DB), BeautifulSoup4</p>
+
+                        <p>An AI procurement agent that coordinates inventory management, supplier comparison, payment authorization, and policy-based approvals across multiple specialized agents, with human oversight for critical decisions. Built to explore how emerging agent protocols such as MCP, A2A, UCP, AP2, A2UI, and AG-UI work together to enable interoperable, end-to-end agentic workflows.</p>
+
+                        <p><strong>Tech Used:</strong> Python, FastAPI, Google ADK, SQLite, MCP, A2A, UCP, AP2, A2UI, AG-UI</p>
+                    </div>
+                </div>
+
+                <!-- Agentic Architecture Design Patterns -->
+                <div class="project-container">
+                    <img src="images/projects/agentic-ai-patterns.png" alt="image-coming-soon" class="project-image modal-image">
+                    <div class="project-content">
+                        <p class="title"><strong>Agentic Architecture Design Patterns</strong></p>
+                        <div class="project-meta">
+                            <div class="project-info">
+                                <span style="color:tomato">Ongoing Project</span> |
+                                <a href="https://github.com/arponkapuria/agentic-architectures-design" target="_blank">
+                                    GitHub
+                                </a>
+                            </div>
+
+                            <div class="project-filters">
+                                <span class="project-filter">Agentic AI</span>
+                                <span class="project-filter">Design Patterns</span>
+                                <span class="project-filter">Implementations</span>
+                            </div>
+                        </div>
+                        <p>SOTA Agentic design patterns implemented end-to-end in LangChain and LangGraph — from single-agent reflection to self-improving systems, with LangSmith tracing throughout.</p>
+                        <p><strong>Tech Used:</strong> Python, LangChain, LangGraph, LangSmith, LangFuse, OpenRouter</p>
+                    </div>
+                </div>
+
+                <!-- ML Inference Engineering -->
+                <div class="project-container">
+                    <img src="images/projects/inference-engineering.png" alt="image-coming-soon" class="project-image modal-image">
+                    <div class="project-content">
+                        <p class="title"><strong>ML Inference Engineering</strong></p>
+                            <div class="project-meta">
+                                <div class="project-info">
+                                    <span style="color:tomato">Ongoing Project</span> |
+                                    <a href="https://github.com/arponkapuria/ml-inference-engineering" target="_blank">
+                                        GitHub
+                                    </a>
+                                </div>
+
+                                <div class="project-filters"> 
+                                    <span class="project-filter">Model Serving</span>
+                                    <span class="project-filter">Optimization</span>  
+                                    <span class="project-filter">Experiments</span>
+                                </div>
+                            </div>
+                        <p>Collection of experiments around getting trained models to run fast in production. Most of the work focuses on what happens after training—exporting models, compiling them for specific hardware, squeezing out performance and actually serving them.</p>
+                    </div>
+                </div>
+
+                <!-- Agentic Doc Extraction -->
+                <div class="project-container">
+                    <img src="images/projects/ade.png" alt="image-coming-soon" class="project-image modal-image">
+                    <div class="project-content">
+                        <p class="title"><strong>OCR to Agentic Document Extraction Pipeline</strong></p>
+                            <div class="project-meta">
+                                <div class="project-info">
+                                    Jan 2026 - Jun 2026 <span style="color:tomato">(Archived)</span> |
+                                    <a href="https://github.com/arponkapuria/agentic-doc-extraction" target="_blank">
+                                        GitHub
+                                    </a>
+                                </div>
+
+                                <div class="project-filters">
+                                    <span class="project-filter">Document AI</span>
+                                    <span class="project-filter">Information Extraction</span>
+                                </div>
+                            </div>
+                        <p>Progression from traditional OCR to Agentic Document Extraction pipelines — covering classical parsing with Tesseract and PaddleOCR through to LLM-powered document understanding and extraction.</p>
+                        <p><strong>Tech Used:</strong> Python, Jupyter Notebook, Tesseract, PaddleOCR, OpenRouter</p>
                     </div>
                 </div>
 
@@ -250,7 +346,7 @@
                         <p class="title"><strong>BetterDB-Powered RAG Observability and Latency Analysis</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                May 2026 |
+                                May 2026 <span style="color:tomato">(Archived)</span> |
                                 <a href="https://github.com/arponkapuria/betterdb-rag-observability" target="_blank">
                                     GitHub
                                 </a>
@@ -270,84 +366,38 @@
                     </div>
                 </div>
 
-                <!-- Agentic Architecture Design Patterns -->
+                <!-- COLD EMAIL GENERATOR -->
                 <div class="project-container">
-                    <img src="images/projects/agentic-ai-patterns.png" alt="image-coming-soon" class="project-image modal-image">
+                    <img src="images/projects/cold-mail-generator.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
-                        <p class="title"><strong>Agentic Architecture Design Patterns</strong></p>
+                        <p class="title"><strong>Retrieval Augmented Generation (RAG) Powered Cold Email Generator</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                <span style="color:tomato">April 2026 - Present</span> |
-                                <a href="https://github.com/arponkapuria/agentic-architectures-design" target="_blank">
+                                April 2025 <span style="color:tomato">(Archived)</span> |
+                                <a href="https://github.com/arponkapuria/cold-mail-generator" target="_blank">
                                     GitHub
                                 </a>
                             </div>
 
                             <div class="project-filters">
-                                <span class="project-filter">Agentic AI</span>
-                                <span class="project-filter">Design Patterns</span>
-                                <span class="project-filter">Implementations</span>
+                                <span class="project-filter">RAG</span>
+                                <span class="project-filter">LLMs</span>
+                                <span class="project-filter">Automation</span>
                             </div>
                         </div>
-                        <p>SOTA Agentic design patterns implemented end-to-end in LangChain and LangGraph — from single-agent reflection to self-improving systems, with LangSmith tracing throughout.</p>
-                        <p><strong>Tech Used:</strong> Python, LangChain, LangGraph, LangSmith, LangFuse, OpenRouter</p>
-                    </div>
-                </div>
-
-                <!-- Agentic Doc Extraction -->
-                <div class="project-container">
-                    <img src="images/projects/ade.png" alt="image-coming-soon" class="project-image modal-image">
-                    <div class="project-content">
-                        <p class="title"><strong>Agentic Doc Extraction</strong></p>
-                            <div class="project-meta">
-                                <div class="project-info">
-                                    <span style="color:tomato">January 2026 - Present</span> |
-                                    <a href="https://github.com/arponkapuria/agentic-doc-extraction" target="_blank">
-                                        GitHub
-                                    </a>
-                                </div>
-
-                                <div class="project-filters">
-                                    <span class="project-filter">Document AI</span>
-                                    <span class="project-filter">Information Extraction</span>
-                                </div>
-                            </div>
-                        <p>Progression from traditional OCR to agentic document extraction pipelines — covering classical parsing with Tesseract and PaddleOCR through to LLM-powered document understanding and extraction.</p>
-                        <p><strong>Tech Used:</strong> Python, Jupyter Notebook, Tesseract, PaddleOCR, OpenRouter</p>
-                    </div>
-                </div>
-
-                <!-- ML Inference Engineering -->
-                <div class="project-container">
-                    <img src="images/projects/inference-engineering.png" alt="image-coming-soon" class="project-image modal-image">
-                    <div class="project-content">
-                        <p class="title"><strong>ML Inference Engineering</strong></p>
-                            <div class="project-meta">
-                                <div class="project-info">
-                                    <span style="color:tomato">January 2026 - Present</span> |
-                                    <a href="https://github.com/arponkapuria/ml-inference-engineering" target="_blank">
-                                        GitHub
-                                    </a>
-                                </div>
-
-                                <div class="project-filters"> 
-                                    <span class="project-filter">Model Serving</span>
-                                    <span class="project-filter">Optimization</span>  
-                                    <span class="project-filter">Experiments</span>
-                                </div>
-                            </div>
-                        <p>Collection of experiments around getting trained models to run fast in production. Most of the work focuses on what happens after training—exporting models, compiling them for specific hardware, squeezing out performance and actually serving them.</p>
+                        <p>Developed a Python and Langchain-based RAG system that generates personalized emails matching graduate applicants with professors based on research alignment. This pipeline leverages Llama-4-Maverick chat model (Groq AI), Jina AI Embeddings model and Cohere's Reranker to generate highly contextual cold emails for improved response rates.</p>
+                        <p><strong>Tech Used:</strong> Python, LangChain, FAISS (Vector DB), BeautifulSoup4</p>
                     </div>
                 </div>
 
                 <!-- NO SMOKING AI -->
-                <div class="project-container">
+                <!-- <div class="project-container">
                     <img src="/images/projects/no-smoking-ai.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
                         <p class="title"><strong>NoSmokeZone: AI on the Hunt for Smokers</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                December 2023 – January 2024 |
+                                December 2023 – January 2024 <span style="color:tomato">(Archived)</span> |
                                 <a href="https://github.com/arponkapuria/NoSmokeZone-AI-on-the-Hunt-for-Smokers" target="_blank">
                                     GitHub
                                 </a>
@@ -361,7 +411,7 @@
                         <p>Trained advanced CNN architectures (VGG16, ResNet-50, EfficientNetV2) and Vision Transformer for smoker detection to enhance public health surveillance. Conducted a comparative analysis to evaluate model effectiveness, areas for improvement and deployed the best performing model.</p>
                         <p><strong>Tech Used:</strong> Python, TensorFlow, Keras, OpenCV, FastAPI, Docker</p>
                     </div>
-                </div>
+                </div> -->
     
                 <!-- C COMPILER -->
                 <div class="project-container">
@@ -370,7 +420,7 @@
                         <p class="title"><strong>C Compiler for while loop with nested while loop and/or if-else constructs.</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                March 2023 – April 2023 |
+                                March 2023 – April 2023 <span style="color:tomato">(Archived)</span> |
                                 <a href="https://github.com/arponkapuria/C-Compiler-while-nested-while-if-else" target="_blank">
                                     GitHub
                                 </a>
@@ -387,13 +437,13 @@
                 </div>
         
                 <!-- 9 BOX PUZZLE -->
-                <div class="project-container">
+                <!-- <div class="project-container">
                     <img src="images/projects/9-box-puzzle.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
                         <p class="title"><strong>9 Box Puzzle – Android App</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                December 2022 |
+                                December 2022 <span style="color:tomato">(Archived)</span> |
                                 <a href="https://github.com/arponkapuria/9-Box-Puzzle-Android-App" target="_blank">
                                     GitHub
                                 </a>
@@ -408,7 +458,7 @@
                         <p>Developed a 9 box puzzle game in Java with a 3x3 grid, featuring an AI-driven solution using the <i>A*</i> algorithm. The game includes a home menu, how-to-play guide, optimal solution visualization, and a performance tracker based on user statistics and puzzle difficulty.</p>
                         <p><strong>Tech Used:</strong> Java, Android Studio, <i>A*</i> Algorithm</p>
                     </div>
-                </div>
+                </div> -->
     
                 <!-- MALICIOUS WEBSITE DETECTION -->
                 <div class="project-container">
@@ -417,14 +467,14 @@
                         <p class="title"><strong>Malicious Website Detection using Machine Learning</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                September 2022 – November 2022 |
+                                Sep 2022 – Nov 2022 <span style="color:tomato">(Archived)</span> |
                                 <a href="https://github.com/arponkapuria/AIML-Project" target="_blank">
                                     GitHub
                                 </a>
                             </div>
                             <div class="project-filters">
-                                <span class="project-filter">Machine Learning</span>
-                                <span class="project-filter">Browser Extension</span>
+                                <span class="project-filter">Classification</span>
+                                <span class="project-filter">Chrome Extension</span>
                             </div>
                         </div>
                         <p>Trained a machine learning model with 94% accuracy to detect malicious websites. Built a Chrome extension using JavaScript to extract webpage features and classify sites, incorporating user feedback for continual learning. The model retrained daily, improving accuracy over time.</p>
@@ -439,7 +489,7 @@
                         <p class="title"><strong>Cube Runner</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
-                                August 2022 |
+                                Aug 2022 <span style="color:tomato">(Archived)</span> |
                                 <a href="https://github.com/arponkapuria/Cube-Runner-Unity/tree/main/Builds/Macos/CubeRunner.app/Contents/MacOS" target="_blank">
                                     MacOS Build
                                 </a>
