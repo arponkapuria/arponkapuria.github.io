@@ -175,7 +175,7 @@
                 <div class="project-container">
                     <img src="images/projects/nanoserve.png" alt="image-coming-soon" class="project-image modal-image">
                     <div class="project-content">
-                        <p class="project-title"><strong>NanoServe: Tiny LLM Inference Engine</strong></p>
+                        <p class="project-title"><strong>NanoServe: A Tiny LLM Inference Engine</strong></p>
                         <div class="project-meta">
                             <div class="project-info">
                                 <span style="color: tomato;">Ongoing Project</span> |
@@ -190,7 +190,7 @@
                             </div>
                         </div>
 
-                        <p>A lightweight LLM inference engine, coded from scratch to explore inference optimization techniques in modern LLM serving. It includes a benchmarking framework to implement, evaluate, and compare these techniques across latency, throughput, memory usage, and resource utilization on Apple Silicon (MPS).</p>
+                        <p>A Tiny LLM inference engine, built on top of HuggingFace Transformers to study inference optimization techniques in modern LLM serving. It includes a benchmarking framework to implement, evaluate, and compare these techniques across latency, throughput, memory usage, and resource utilization on Apple Silicon (MPS).</p>
                         <p><strong>Tech Used:</strong> Python, PyTorch, Transformers (HuggingFace)</p>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                                 <span class="project-filter">LLMOps</span>
                             </div>
                         </div>
-                        <p>Developed a multi-tenant agentic RAG platform for citation-backed document Q&A, with LangGraph-based query planning, tool selection, hybrid retrieval, and cross-provider LLM routing for availability and cost. Added semantic caching, retries, circuit breakers, corpus-level isolation, and input/output guardrails for production-grade reliability. Integrated Langfuse for tracing and a custom evaluation harness to measure retrieval and generation quality, faithfulness, correctness, and abstention.</p>
+                        <p>DocRAG is a cost-aware, multi-tenant agentic RAG pipeline for grounded, citation-backed multi-turn Q&A over user documents, from async ingestion to serving, running within free-tier LLM quotas. A LangGraph query planner selects tools per question, while a two-tier semantic cache and multi-provider LLM routing with circuit breakers and failover keep it available. Login-free, session-scoped isolation covers every data store, with cascade deletion on expiry, and rate limiting and guardrails defend against prompt injection and leakage. Tracing with Langfuse and a RAGAS evaluation harness on a hand-verified golden dataset compare multiple retrieval setups.</p>
                         <p><strong>Tech Used:</strong> Python, FastAPI, LangGraph, Docling, Qdrant, FastEmbed, Redis Stack, PostgreSQL, MinIO, Groq, Mistral Vision, Langfuse, RAGAS, Docker</p>
                     </div>
                 </div>
@@ -385,7 +385,7 @@
                                 <span class="project-filter">Automation</span>
                             </div>
                         </div>
-                        <p>Developed a Python and Langchain-based RAG system that generates personalized emails matching graduate applicants with professors based on research alignment. This pipeline leverages Llama-4-Maverick chat model (Groq AI), Jina AI Embeddings model and Cohere's Reranker to generate highly contextual cold emails for improved response rates.</p>
+                        <p>Developed a Python and LangChain-based RAG system that generates personalized cold emails by combining sender and recipient profiles with relevant published work. The pipeline uses FAISS vector search, Jina AI Embeddings, and Cohere Reranker to retrieve and prioritize relevant context, with Llama-4-Maverick via Groq Cloud generating highly tailored, human-like email drafts.</p>
                         <p><strong>Tech Used:</strong> Python, LangChain, FAISS (Vector DB), BeautifulSoup4</p>
                     </div>
                 </div>

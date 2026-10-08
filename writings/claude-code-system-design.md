@@ -2,8 +2,8 @@
 title: Designing an AI Coding Agent Platform like Claude Code / Cursor
 description: A system design walkthrough for building the agentic coding panel behind tools like Claude Code or Cursor. This article covers execution architecture, scaling to millions of sessions, and handling failures like infinite loops, crashes, and irreversible actions.
 
-date: August 11, 2026
-modified: August 11, 2026
+date: August 19, 2026
+modified: August 19, 2026
 
 category: Dev Journal
 tags: System Design, AI, LLM, Memory
