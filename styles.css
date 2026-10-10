@@ -37,8 +37,8 @@
     --font-mono: ui-monospace, SFMono-Regular, monospace, "SF Mono", Menlo, Consolas;
     --font-footer: 'Spectral', sans-serif;
 
-    --blog-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
-    --blog-font-serif: "Charter", "Iowan Old Style", "Georgia", "Times New Roman", serif;
+    --blog-font-sans: "Exo 2", -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    --blog-font-serif: "Exo 2", "Charter", "Iowan Old Style", "Georgia", "Times New Roman", serif;
 
     /* Border radius */
     --radius-card: 12px;
@@ -1021,7 +1021,7 @@ a:hover {
     /* line-height: 1.2; */
     /* color: var(--color-notice-border-left); */
     color: var(--color-link);
-    font-family: var(--font-serif);
+    font-family: var(--blog-font-serif);
     /* font-weight: 450; */
     margin: 0 0 0.18em 0;
     /* letter-spacing: 0.01em; */
