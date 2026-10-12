@@ -1382,3 +1382,7 @@ Source code: [github.com/arponkapuria/scalable-agentic-rag-pipeline](https://git
 :::note
 About the painting: ["The Death of Socrates (1787)" by Jacques-Louis David (public domain), from Wikimedia Commons](https://commons.wikimedia.org/wiki/File:David_-_The_Death_of_Socrates.jpg#/media/File:David_-_The_Death_of_Socrates.jpg)
 :::
+
+:::note
+N.B: This page was drafted with AI assistance and then reviewed and verified by me.
+:::

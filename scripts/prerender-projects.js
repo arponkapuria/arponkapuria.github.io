@@ -10,7 +10,7 @@ const path = require("path");
 const SITE_URL = "https://arponkapuria.github.io";
 const PROJECTS_DIR = path.join(__dirname, "..", "projects");
 const TEMPLATE_PATH = path.join(__dirname, "prerender-project-template.html");
-const COVER_SVG_PATH = path.join(__dirname, "/images/cover-pines.svg");
+const COVER_SVG_PATH = path.join(__dirname, "../images/cover-pines.svg");
 const DEFAULT_IMAGE = `${SITE_URL}/images/android-chrome-192x192.png`;
 
 function parseFrontmatter(raw) {
