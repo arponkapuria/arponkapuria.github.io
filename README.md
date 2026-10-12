@@ -5,7 +5,7 @@ The website is currently built using vanilla HTML, CSS, and JavaScript with a li
 <br>
 
 
-For live inspecting the blogs, prerender them first.
+For live inspecting the blogs and the projects, prerender them first.
 
 ```javascript
 node scripts/prerender.js

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta name="author" content="Arpon Kapuria">
+{{KEYWORDS_TAG}}
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Arpon Kapuria">
+<meta property="og:title" content="{{OG_TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:image" content="{{IMAGE}}">
+{{IMAGE_DIMENSIONS}}
+<meta property="og:image:alt" content="{{IMAGE_ALT}}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{OG_TITLE}}">
+<meta name="twitter:description" content="{{DESCRIPTION}}">
+<meta name="twitter:image" content="{{IMAGE}}">
+<meta name="twitter:creator" content="@_aaaaarrp">
+
+<link rel="canonical" href="{{URL}}">
+<link rel="icon" href="/images/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Exo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/projects/project.css">
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script defer src="/projects/diagram.js"></script>
+<script defer src="/projects/project.js"></script>
+</head>
+<body>
+<div class="cover" role="img" aria-label="Cover artwork: ink-wash pine trees in mist, in the style of Hasegawa Tohaku">{{COVER_SVG}}<div class="cover-img" id="cover-img"></div></div>
+<main id="project-root">
+<div id="loading" class="loading">Loading…</div>
+</main>
+<button class="to-top" id="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+<script>window.__PROJECT_SLUG__ = "{{SLUG}}";</script>
+<noscript>
+  <p>{{OG_TITLE}}: {{DESCRIPTION}}</p>
+</noscript>
+</body>
+</html>

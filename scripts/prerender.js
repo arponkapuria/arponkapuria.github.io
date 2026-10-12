@@ -120,3 +120,6 @@ function main() {
 }
 
 main();
+
+// Project write-ups (projects/<slug>/index.md -> index.html)
+require("./prerender-projects.js")();
