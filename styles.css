@@ -941,17 +941,17 @@ a:hover {
 }
 
 /* Individual filter button colors */
-.filter-research_journal {
+.filter-experiments {
     color: #d8674b;
     border-color: #d8674b;
 }
 
-.filter-dev_journal {
+.filter-engineering {
     color: #1f9d8f;
     border-color: #1f9d8f;
 }
 
-.filter-academic_journal {
+.filter-insights {
     color: #c375d7;
     border-color: #c375d7;
 }
@@ -989,17 +989,17 @@ a:hover {
 
 
 /* Tag background colors matching buttons but lighter */
-.article-filter.filter-research_journal {
+.article-filter.filter-experiments {
     color: #d8674b;
     background-color: rgba(231, 111, 81, 0.12);
 }
 
-.article-filter.filter-dev_journal {
+.article-filter.filter-engineering {
     color: #1f9d8f;
     background-color: rgba(42, 157, 143, 0.12);
 }
 
-.article-filter.filter-academic_journal {
+.article-filter.filter-insights {
     color: #c375d7;
     background-color: rgba(202, 161, 205, 0.18);
 }
